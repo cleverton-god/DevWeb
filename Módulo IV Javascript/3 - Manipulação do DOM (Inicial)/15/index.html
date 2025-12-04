@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mini Quiz</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="quiz">
+      <h2>Mini Quiz</h2>
+
+      <div class="pergunta">
+        <p>1. Qual é a capital da França?</p>
+        <label><input type="radio" name="q1" value="0" /> Londres</label>
+        <label><input type="radio" name="q1" value="1" /> Paris</label>
+        <label><input type="radio" name="q1" value="0" /> Roma</label>
+      </div>
+
+      <div class="pergunta">
+        <p>2. Quanto é 5 × 3?</p>
+        <label><input type="radio" name="q2" value="0" /> 10</label>
+        <label><input type="radio" name="q2" value="1" /> 15</label>
+        <label><input type="radio" name="q2" value="0" /> 20</label>
+      </div>
+
+      <div class="pergunta">
+        <p>3. Qual destes é um mamífero?</p>
+        <label><input type="radio" name="q3" value="1" /> Golfinho</label>
+        <label><input type="radio" name="q3" value="0" /> Tubarão</label>
+        <label><input type="radio" name="q3" value="0" /> Caranguejo</label>
+      </div>
+
+      <button id="finalizar">Finalizar</button>
+
+      <h3 id="resultado"></h3>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

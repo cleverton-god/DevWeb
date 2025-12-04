@@ -1,0 +1,15 @@
+#quiz {
+    max-width: 400px;
+    font-family: Arial;
+  }
+  .pergunta {
+    margin-bottom: 20px;
+  }
+  label {
+    display: block;
+  }
+  button {
+    margin-top: 15px;
+    padding: 8px 15px;
+  }
+  
