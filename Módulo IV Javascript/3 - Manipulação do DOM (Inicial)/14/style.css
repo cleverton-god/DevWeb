@@ -1,0 +1,11 @@
+#busca {
+    padding: 8px;
+    width: 250px;
+    margin-bottom: 10px;
+  }
+  
+  #lista li {
+    padding: 6px;
+    list-style: none;
+  }
+  
