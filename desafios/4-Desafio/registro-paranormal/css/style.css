@@ -1,0 +1,131 @@
+/* ===== Estilo Global ===== */
+body {
+  background-color: #1e1e1e; /* fundo cinza escuro */
+  color: #ffffff; /* texto padrão branco */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Header ===== */
+header {
+  width: 100%;
+  z-index: 1000;
+}
+
+header .nav-link {
+  color: #ffffff;
+  transition: color 0.3s;
+}
+
+header .nav-link.active,
+header .nav-link:hover {
+  color: #0d6efd; /* destaque azul no hover */
+}
+
+/* ===== HERO ===== */
+.hero-section {
+  background-color: #1e1e1e; /* mantém fundo cinza escuro */
+  padding: 120px 20px 80px 20px;
+  text-align: center;
+}
+
+.hero-section h1 {
+  font-size: 2.8rem;
+  color: #ffffff;
+}
+
+.hero-section p {
+  font-size: 1.1rem;
+  color: #cccccc;
+}
+
+/* ===== Cards de Criaturas ===== */
+.card {
+  background-color: #000000; /* cards pretos */
+  border: none;
+  border-radius: 0.5rem;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+}
+
+.card .card-title {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.card .card-text {
+  color: #e0e0e0;
+}
+
+/* Imagem no topo do card */
+.card-img-top {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* ===== Nível de Ameaça ===== */
+.level-medio {
+  color: #ffc107; /* amarelo */
+  font-weight: bold;
+}
+
+.level-alto {
+  color: #fd7e14; /* laranja */
+  font-weight: bold;
+}
+
+.level-critico {
+  color: #dc3545; /* vermelho */
+  font-weight: bold;
+}
+
+/* ===== Divisor ===== */
+hr {
+  border-color: #444444;
+}
+
+/* ===== Footer ===== */
+footer {
+  background-color: #1c1c1c;
+  color: #bbbbbb;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* ===== Botões ===== */
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #0b5ed7;
+  transform: translateY(-2px);
+}
+
+/* ===== Responsividade ===== */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 100px 20px 60px 20px;
+  }
+
+  .hero-section h1 {
+    font-size: 2rem;
+  }
+
+  .card-img-top {
+    height: 180px;
+  }
+}
