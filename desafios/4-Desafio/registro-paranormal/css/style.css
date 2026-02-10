@@ -54,7 +54,8 @@ header .nav-link:hover {
 
 /* ===== Botões do Sistema ===== */
 #btnParanormal,
-#btnEmergencia {
+#btnEmergencia,
+#btnAlertaMaximo {
   padding: 12px 20px;
   font-size: 1rem;
   min-width: 240px;
@@ -73,7 +74,6 @@ header .nav-link:hover {
 .alerta-maximo .card {
   border: 2px solid #dc3545;
 }
-
 
 /* ===== Cards de Criaturas ===== */
 .card {
@@ -121,6 +121,25 @@ header .nav-link:hover {
   font-weight: bold;
 }
 
+/* ===== Detalhes das Criaturas (Tarefa 15) ===== */
+.detalhes-criatura {
+  display: none;
+  margin-top: 12px;
+  padding: 10px;
+  background-color: #111111;
+  border-left: 3px solid #0d6efd;
+  font-size: 0.9rem;
+  color: #dddddd;
+}
+
+.detalhes-criatura p {
+  margin-bottom: 6px;
+}
+
+.detalhes-criatura.ativo {
+  display: block;
+}
+
 /* ===== Divisor ===== */
 hr {
   border-color: #444444;
@@ -165,11 +184,20 @@ footer p {
   }
 
   #btnParanormal,
-  #btnEmergencia {
+  #btnEmergencia,
+  #btnAlertaMaximo {
     width: 100%;
   }
 
   .card-img-top {
     height: 180px;
   }
+}
+.alerta-maximo {
+  background-color: #3b0000;
+}
+
+.alerta-maximo .hero-section,
+.alerta-maximo footer {
+  background-color: #2a0000;
 }

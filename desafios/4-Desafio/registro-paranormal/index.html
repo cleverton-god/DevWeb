@@ -18,25 +18,15 @@
   <body>
     <!-- HEADER -->
     <header class="bg-dark w-100 fixed-top shadow-sm">
-      <div
-        class="container d-flex flex-wrap justify-content-between align-items-center py-3"
-      >
+      <div class="container d-flex flex-wrap justify-content-between align-items-center py-3">
         <a href="#" class="d-flex align-items-center text-decoration-none">
           <span class="fs-4 fw-semibold text-white">Arquivo da Ordem</span>
         </a>
         <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a href="#hero" class="nav-link">Início</a>
-          </li>
-          <li class="nav-item">
-            <a href="#criaturas" class="nav-link">Criaturas</a>
-          </li>
-          <li class="nav-item">
-            <a href="#sobrevivencia" class="nav-link">Sobrevivência</a>
-          </li>
-          <li class="nav-item">
-            <a href="#contato" class="nav-link">Contato</a>
-          </li>
+          <li class="nav-item"><a href="#hero" class="nav-link">Início</a></li>
+          <li class="nav-item"><a href="#criaturas" class="nav-link">Criaturas</a></li>
+          <li class="nav-item"><a href="#sobrevivencia" class="nav-link">Sobrevivência</a></li>
+          <li class="nav-item"><a href="#contato" class="nav-link">Contato</a></li>
         </ul>
       </div>
     </header>
@@ -53,16 +43,13 @@
 
         <p class="lead mt-3">
           O Sistema de Registro de Criaturas é o banco de dados fundamental da
-          Ordem, documentando detalhes, comportamentos e métodos de contenção
-          para entidades paranormais.
+          Ordem, documentando detalhes, comportamentos e métodos de contenção.
         </p>
 
-        <!-- Status do Sistema -->
         <h2 id="statusSistema" class="mt-4 fw-semibold">
           Sistema operando normalmente.
         </h2>
 
-        <!-- Ações do Sistema -->
         <div class="d-flex justify-content-center gap-3 mt-3 flex-wrap">
           <button id="btnParanormal" class="btn btn-outline-light">
             Testar Sistema Paranormal
@@ -89,22 +76,26 @@
       <h2 class="text-center text-white fw-bold mb-5">Criaturas Registradas</h2>
 
       <div class="row g-4">
+
         <!-- Observador do Véu -->
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card text-white h-100 shadow-sm">
-            <img
-              src="./img/Observador do Véu.jpg"
-              class="card-img-top"
-              alt="Observador do Véu"
-            />
+            <img src="./img/Observador do Véu.jpg" class="card-img-top" alt="Observador do Véu" />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Nome: Observador do Véu</h5>
               <p class="level-medio"><strong>Nível de Ameaça:</strong> Médio</p>
               <p class="card-text">
-                Entidade humanoide que se manifesta em reflexos e superfícies
-                espelhadas.
+                Entidade humanoide que se manifesta em reflexos e superfícies espelhadas.
               </p>
-              <a href="#" class="btn btn-primary mt-auto">Ver Detalhes</a>
+
+              <div class="detalhes-criatura">
+                <p><strong>Fraquezas:</strong> Luz intensa e superfícies quebradas.</p>
+                <p><strong>Estratégia de combate:</strong> Isolar o ambiente e evitar contato visual.</p>
+              </div>
+
+              <button class="btn btn-outline-info btn-detalhes mt-2">
+                Mostrar Detalhes
+              </button>
             </div>
           </div>
         </div>
@@ -112,19 +103,22 @@
         <!-- Devorador de Ecos -->
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card text-white h-100 shadow-sm">
-            <img
-              src="./img/Devorador de Ecos.jpg"
-              class="card-img-top"
-              alt="Devorador de Ecos"
-            />
+            <img src="./img/Devorador de Ecos.jpg" class="card-img-top" alt="Devorador de Ecos" />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Nome: Devorador de Ecos</h5>
               <p class="level-alto"><strong>Nível de Ameaça:</strong> Alto</p>
               <p class="card-text">
-                Criatura invisível à luz comum, detectável apenas por distorções
-                sonoras.
+                Criatura invisível à luz comum, detectável apenas por distorções sonoras.
               </p>
-              <a href="#" class="btn btn-primary mt-auto">Ver Detalhes</a>
+
+              <div class="detalhes-criatura">
+                <p><strong>Fraquezas:</strong> Sons de alta frequência.</p>
+                <p><strong>Estratégia de combate:</strong> Uso de emissores sonoros e isolamento acústico.</p>
+              </div>
+
+              <button class="btn btn-outline-info btn-detalhes mt-2">
+                Mostrar Detalhes
+              </button>
             </div>
           </div>
         </div>
@@ -132,23 +126,26 @@
         <!-- A Noiva das Cinzas -->
         <div class="col-12 col-md-6 col-lg-4">
           <div class="card text-white h-100 shadow-sm">
-            <img
-              src="./img/A Noiva das Cinzas.jpg"
-              class="card-img-top"
-              alt="A Noiva das Cinzas"
-            />
+            <img src="./img/A Noiva das Cinzas.jpg" class="card-img-top" alt="A Noiva das Cinzas" />
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">Nome: A Noiva das Cinzas</h5>
-              <p class="level-critico">
-                <strong>Nível de Ameaça:</strong> Crítico
-              </p>
+              <p class="level-critico"><strong>Nível de Ameaça:</strong> Crítico</p>
               <p class="card-text">
                 Manifestação paranormal ligada a rituais de luto mal-sucedidos.
               </p>
-              <a href="#" class="btn btn-primary mt-auto">Ver Detalhes</a>
+
+              <div class="detalhes-criatura">
+                <p><strong>Fraquezas:</strong> Água corrente e símbolos de purificação.</p>
+                <p><strong>Estratégia de combate:</strong> Conter à distância e executar ritual de selamento.</p>
+              </div>
+
+              <button class="btn btn-outline-info btn-detalhes mt-2">
+                Mostrar Detalhes
+              </button>
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
