@@ -14,18 +14,23 @@ header {
 }
 
 header .nav-link {
+  background-color: #000000;
   color: #ffffff;
   transition: color 0.3s;
+  padding: 10px 20px;    
+  margin: 0 8px;             
+  border-radius: 5px;        
+  display: inline-block;
 }
 
 header .nav-link.active,
 header .nav-link:hover {
-  color: #0d6efd; /* destaque azul no hover */
+  color: #0d6efd; 
 }
 
 /* ===== HERO ===== */
 .hero-section {
-  background-color: #1e1e1e; /* mantém fundo cinza escuro */
+  background-color: #1e1e1e; 
   padding: 120px 20px 80px 20px;
   text-align: center;
 }
@@ -42,7 +47,7 @@ header .nav-link:hover {
 
 /* ===== Cards de Criaturas ===== */
 .card {
-  background-color: #000000; /* cards pretos */
+  background-color: #000000; 
   border: none;
   border-radius: 0.5rem;
   transition: transform 0.3s, box-shadow 0.3s;
