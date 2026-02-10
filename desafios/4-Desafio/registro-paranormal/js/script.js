@@ -1,264 +1,193 @@
 /* ==================================================
-   INICIALIZAÇÃO
+   INÍCIO DO SISTEMA
 ================================================== */
 document.addEventListener("DOMContentLoaded", () => {
-  cacheDOM();
-  inicializarSistema();
-  registrarEventos();
+  pegarElementos();
+  configurarEventos();
+  iniciarSistema();
+  atualizarContadorCriaturas();
 });
 
 /* ==================================================
-   CACHE DE ELEMENTOS
+   ELEMENTOS DO DOM
 ================================================== */
-const DOM = {};
+let btnParanormal;
+let btnEmergencia;
+let btnAlertaMaximo;
+let statusSistema;
+let botoesDetalhes;
+let totalCriaturas;
+let cardsCriaturas;
 
-function cacheDOM() {
-  DOM.btnParanormal = document.getElementById("btnParanormal");
-  DOM.btnEmergencia = document.getElementById("btnEmergencia");
-  DOM.btnAlertaMaximo = document.getElementById("btnAlertaMaximo");
-  DOM.statusSistema = document.getElementById("statusSistema");
-  DOM.botoesDetalhes = document.querySelectorAll(".btn-detalhes");
+/* Pega tudo do HTML uma única vez */
+function pegarElementos() {
+  btnParanormal = document.getElementById("btnParanormal");
+  btnEmergencia = document.getElementById("btnEmergencia");
+  btnAlertaMaximo = document.getElementById("btnAlertaMaximo");
+  statusSistema = document.getElementById("statusSistema");
+  botoesDetalhes = document.querySelectorAll(".btn-detalhes");
+
+  totalCriaturas = document.getElementById("totalCriaturas");
+  cardsCriaturas = document.querySelectorAll(".criatura-card");
 }
 
 /* ==================================================
-   ESTADO GLOBAL DO SISTEMA
+   ESTADO DO SISTEMA
 ================================================== */
-const estadoSistema = {
-  emergenciaAtiva: false,
-  alertaMaximoAtivo: false,
-  testeEmExecucao: false,
-  resultadoCritico: false
-};
+let emergenciaAtiva = false;
+let alertaMaximoAtivo = false;
+let testeEmAndamento = false;
 
 /* ==================================================
    CONFIGURAÇÃO INICIAL
 ================================================== */
-function inicializarSistema() {
+function iniciarSistema() {
   atualizarStatus("🟢 Sistema operando normalmente.");
 }
 
 /* ==================================================
-   REGISTRO DE EVENTOS
+   EVENTOS
 ================================================== */
-function registrarEventos() {
-  DOM.btnParanormal.addEventListener("click", executarTesteParanormal);
-  DOM.btnEmergencia.addEventListener("click", alternarEmergencia);
-  DOM.btnAlertaMaximo.addEventListener("click", alternarAlertaMaximo);
+function configurarEventos() {
+  btnParanormal.addEventListener("click", testarSistema);
+  btnEmergencia.addEventListener("click", alternarEmergencia);
+  btnAlertaMaximo.addEventListener("click", alternarAlertaMaximo);
 
-  DOM.botoesDetalhes.forEach((botao) => {
+  botoesDetalhes.forEach((botao) => {
     botao.addEventListener("click", () =>
-      alternarDetalhesCriatura(botao)
+      mostrarOuOcultarDetalhes(botao)
     );
   });
 }
 
 /* ==================================================
-   UTILIDADES
+   FUNÇÕES BÁSICAS
 ================================================== */
-function atualizarStatus(texto, classe = "") {
-  DOM.statusSistema.innerText = texto;
-  DOM.statusSistema.className = `mt-4 fw-semibold ${classe}`;
+function atualizarStatus(texto) {
+  statusSistema.innerText = texto;
 }
 
-function bloquearBotao(botao, bloquear = true) {
+function bloquearBotao(botao, bloquear) {
   botao.disabled = bloquear;
 }
 
-function trocarTextoBotao(botao, texto) {
-  botao.innerText = texto;
-}
-
-function logSistema(mensagem) {
-  console.log(`[SISTEMA] ${mensagem}`);
+/* ==================================================
+   CONTADOR DE CRIATURAS REGISTRADAS
+================================================== */
+function atualizarContadorCriaturas() {
+  const quantidade = cardsCriaturas.length;
+  totalCriaturas.innerText = quantidade;
 }
 
 /* ==================================================
    TESTE DO SISTEMA PARANORMAL
 ================================================== */
-function executarTesteParanormal() {
-  if (estadoSistema.testeEmExecucao) return;
+function testarSistema() {
+  if (testeEmAndamento) return;
 
-  estadoSistema.testeEmExecucao = true;
-  bloquearBotao(DOM.btnParanormal, true);
+  testeEmAndamento = true;
+  bloquearBotao(btnParanormal, true);
 
-  logSistema("Teste paranormal iniciado");
-  iniciarVarredura();
+  atualizarStatus("🔍 Verificando atividade paranormal...");
 
-  setTimeout(analisarResultadoParanormal, 2500);
-  setTimeout(finalizarTesteParanormal, 6000);
+  setTimeout(() => {
+    const resultado = gerarResultado();
+    mostrarResultado(resultado);
+
+    setTimeout(() => {
+      finalizarTeste();
+    }, 3000);
+  }, 2000);
 }
 
-function iniciarVarredura() {
-  atualizarStatus("🔍 Iniciando varredura paranormal...", "text-warning");
+/* Define o que aconteceu no teste */
+function gerarResultado() {
+  const possibilidades = [
+    "nenhuma",
+    "anomalia",
+    "ameaça"
+  ];
+
+  const indice = Math.floor(Math.random() * possibilidades.length);
+  return possibilidades[indice];
 }
 
-function analisarResultadoParanormal() {
-  const resultado = obterResultadoParanormal();
+/* Mostra o resultado na tela */
+function mostrarResultado(resultado) {
+  if (resultado === "nenhuma") {
+    atualizarStatus("✅ Nenhuma ameaça encontrada.");
+  }
 
-  estadoSistema.resultadoCritico = resultado.critico;
-  atualizarStatus(resultado.mensagem, resultado.classe);
-  logSistema(resultado.log);
-}
+  if (resultado === "anomalia") {
+    atualizarStatus("⚠️ Anomalia detectada. Monitorando...");
+  }
 
-function finalizarTesteParanormal() {
-  if (estadoSistema.resultadoCritico) {
-    iniciarContencao();
-  } else {
-    encerrarTeste();
+  if (resultado === "ameaça") {
+    atualizarStatus("🛑 Ameaça detectada! Contenção em andamento...");
+
+    setTimeout(() => {
+      atualizarStatus("✅ Ameaça contida com sucesso.");
+    }, 2000);
   }
 }
 
-function iniciarContencao() {
-  logSistema("Procedimentos de contenção iniciados");
-
-  atualizarStatus(
-    "🛑 Procedimentos de contenção em andamento...",
-    "text-warning"
-  );
-
-  setTimeout(concluirContencao, 3000);
-}
-
-function concluirContencao() {
-  atualizarStatus(
-    "✅ Ameaça contida com sucesso.",
-    "text-success"
-  );
-
-  logSistema("Ameaça contida");
-
-  setTimeout(encerrarTeste, 2500);
-}
-
-function encerrarTeste() {
+/* Finaliza o teste e volta ao normal */
+function finalizarTeste() {
   atualizarStatus("🟢 Sistema operando normalmente.");
-  bloquearBotao(DOM.btnParanormal, false);
-
-  estadoSistema.testeEmExecucao = false;
-  estadoSistema.resultadoCritico = false;
-
-  logSistema("Teste paranormal encerrado");
-}
-
-function obterResultadoParanormal() {
-  const resultados = [
-    {
-      mensagem: "✅ Nenhuma ameaça encontrada.",
-      classe: "text-success",
-      critico: false,
-      log: "Nenhuma anomalia detectada"
-    },
-    {
-      mensagem: "⚠️ Presença anômala detectada!",
-      classe: "text-danger",
-      critico: true,
-      log: "Anomalia identificada"
-    },
-    {
-      mensagem: "👁️ Entidade hostil detectada.",
-      classe: "text-danger",
-      critico: true,
-      log: "Entidade hostil observada"
-    }
-  ];
-
-  return resultados[Math.floor(Math.random() * resultados.length)];
+  bloquearBotao(btnParanormal, false);
+  testeEmAndamento = false;
 }
 
 /* ==================================================
    PROTOCOLO DE EMERGÊNCIA
 ================================================== */
 function alternarEmergencia() {
-  estadoSistema.emergenciaAtiva
-    ? desativarEmergencia()
-    : ativarEmergencia();
+  emergenciaAtiva ? desativarEmergencia() : ativarEmergencia();
 }
 
 function ativarEmergencia() {
-  estadoSistema.emergenciaAtiva = true;
-
-  atualizarStatus("🚨 PROTOCOLO DE EMERGÊNCIA ATIVADO 🚨", "text-danger");
+  emergenciaAtiva = true;
   document.body.classList.add("emergencia");
-  document.body.classList.add("isolamento");
-
-  trocarTextoBotao(
-    DOM.btnEmergencia,
-    "Desativar Protocolo de Emergência"
-  );
-
-  DOM.btnEmergencia.classList.replace("btn-danger", "btn-outline-danger");
-  logSistema("Emergência ativada e setores isolados");
+  atualizarStatus("🚨 PROTOCOLO DE EMERGÊNCIA ATIVADO 🚨");
+  btnEmergencia.innerText = "Desativar Emergência";
 }
 
 function desativarEmergencia() {
-  estadoSistema.emergenciaAtiva = false;
-
+  emergenciaAtiva = false;
+  document.body.classList.remove("emergencia");
   atualizarStatus("🟢 Sistema operando normalmente.");
-  document.body.classList.remove("emergencia", "isolamento");
-
-  trocarTextoBotao(
-    DOM.btnEmergencia,
-    "Ativar Protocolo de Emergência"
-  );
-
-  DOM.btnEmergencia.classList.replace("btn-outline-danger", "btn-danger");
-  logSistema("Emergência desativada");
+  btnEmergencia.innerText = "Ativar Protocolo de Emergência";
 }
 
 /* ==================================================
-   MODO ALERTA MÁXIMO
+   ALERTA MÁXIMO
 ================================================== */
 function alternarAlertaMaximo() {
-  estadoSistema.alertaMaximoAtivo
-    ? desativarAlertaMaximo()
-    : ativarAlertaMaximo();
+  alertaMaximoAtivo ? desativarAlertaMaximo() : ativarAlertaMaximo();
 }
 
 function ativarAlertaMaximo() {
-  estadoSistema.alertaMaximoAtivo = true;
-
+  alertaMaximoAtivo = true;
   document.body.classList.add("alerta-maximo");
-  atualizarStatus("🔴 MODO ALERTA MÁXIMO ATIVADO 🔴", "text-danger");
-
-  trocarTextoBotao(
-    DOM.btnAlertaMaximo,
-    "Desativar Alerta Máximo"
-  );
-
-  DOM.btnAlertaMaximo.classList.replace("btn-warning", "btn-dark");
-  logSistema("Alerta máximo ativado");
+  atualizarStatus("🔴 ALERTA MÁXIMO ATIVADO 🔴");
+  btnAlertaMaximo.innerText = "Desativar Alerta Máximo";
 }
 
 function desativarAlertaMaximo() {
-  estadoSistema.alertaMaximoAtivo = false;
-
+  alertaMaximoAtivo = false;
   document.body.classList.remove("alerta-maximo");
   atualizarStatus("🟢 Sistema operando normalmente.");
-
-  trocarTextoBotao(
-    DOM.btnAlertaMaximo,
-    "Modo Alerta Máximo"
-  );
-
-  DOM.btnAlertaMaximo.classList.replace("btn-dark", "btn-warning");
-  logSistema("Alerta máximo desativado");
+  btnAlertaMaximo.innerText = "Modo Alerta Máximo";
 }
 
 /* ==================================================
    DETALHES DAS CRIATURAS
 ================================================== */
-function alternarDetalhesCriatura(botao) {
+function mostrarOuOcultarDetalhes(botao) {
   const detalhes = botao.previousElementSibling;
   const ativo = detalhes.classList.toggle("ativo");
 
-  trocarTextoBotao(
-    botao,
-    ativo ? "Ocultar Detalhes" : "Mostrar Detalhes"
-  );
-
-  logSistema(
-    ativo
-      ? "Detalhes da criatura exibidos"
-      : "Detalhes da criatura ocultos"
-  );
+  botao.innerText = ativo
+    ? "Ocultar Detalhes"
+    : "Mostrar Detalhes";
 }

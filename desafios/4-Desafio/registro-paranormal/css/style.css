@@ -1,13 +1,18 @@
-/* ===== Estilo Global ===== */
+/* ==================================================
+   ESTILO GLOBAL
+================================================== */
 body {
   background-color: #1e1e1e;
   color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
+  transition: background-color 0.5s ease;
 }
 
-/* ===== Header ===== */
+/* ==================================================
+   HEADER
+================================================== */
 header {
   width: 100%;
   z-index: 1000;
@@ -16,11 +21,10 @@ header {
 header .nav-link {
   background-color: #000000;
   color: #ffffff;
-  transition: color 0.3s;
   padding: 10px 20px;
   margin: 0 8px;
   border-radius: 5px;
-  display: inline-block;
+  transition: color 0.3s;
 }
 
 header .nav-link.active,
@@ -28,16 +32,18 @@ header .nav-link:hover {
   color: #0d6efd;
 }
 
-/* ===== HERO ===== */
+/* ==================================================
+   HERO
+================================================== */
 .hero-section {
   background-color: #1e1e1e;
-  padding: 120px 20px 80px 20px;
+  padding: 120px 20px 80px;
   text-align: center;
+  transition: background-color 0.5s ease;
 }
 
 .hero-section h1 {
   font-size: 2.8rem;
-  color: #ffffff;
 }
 
 .hero-section p {
@@ -45,14 +51,19 @@ header .nav-link:hover {
   color: #cccccc;
 }
 
-/* ===== Status do Sistema ===== */
+/* ==================================================
+   STATUS DO SISTEMA
+================================================== */
 #statusSistema {
   margin-top: 25px;
   font-size: 1.4rem;
   letter-spacing: 0.5px;
+  transition: color 0.4s ease;
 }
 
-/* ===== Botões do Sistema ===== */
+/* ==================================================
+   BOTÕES DO SISTEMA
+================================================== */
 #btnParanormal,
 #btnEmergencia,
 #btnAlertaMaximo {
@@ -61,26 +72,14 @@ header .nav-link:hover {
   min-width: 240px;
 }
 
-/* ===== Modo Alerta Máximo ===== */
-.alerta-maximo {
-  background-color: #3b0000;
-}
-
-.alerta-maximo #statusSistema {
-  color: #ff4d4d;
-  font-weight: bold;
-}
-
-.alerta-maximo .card {
-  border: 2px solid #dc3545;
-}
-
-/* ===== Cards de Criaturas ===== */
+/* ==================================================
+   CARDS DE CRIATURAS
+================================================== */
 .card {
   background-color: #000000;
   border: none;
   border-radius: 0.5rem;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
 }
 
 .card:hover {
@@ -88,24 +87,24 @@ header .nav-link:hover {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
 }
 
-.card .card-title {
-  color: #ffffff;
+.card-title {
   font-weight: bold;
 }
 
-.card .card-text {
+.card-text {
   color: #e0e0e0;
 }
 
-/* ===== Imagem do Card ===== */
 .card-img-top {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
   height: 200px;
   object-fit: cover;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
 }
 
-/* ===== Nível de Ameaça ===== */
+/* ==================================================
+   NÍVEIS DE AMEAÇA
+================================================== */
 .level-medio {
   color: #ffc107;
   font-weight: bold;
@@ -121,7 +120,9 @@ header .nav-link:hover {
   font-weight: bold;
 }
 
-/* ===== Detalhes das Criaturas (Tarefa 15) ===== */
+/* ==================================================
+   DETALHES DAS CRIATURAS
+================================================== */
 .detalhes-criatura {
   display: none;
   margin-top: 12px;
@@ -132,47 +133,88 @@ header .nav-link:hover {
   color: #dddddd;
 }
 
-.detalhes-criatura p {
-  margin-bottom: 6px;
-}
-
 .detalhes-criatura.ativo {
   display: block;
 }
 
-/* ===== Divisor ===== */
-hr {
-  border-color: #444444;
+/* ==================================================
+   MODO EMERGÊNCIA
+================================================== */
+body.emergencia {
+  background-color: #2a1a00;
 }
 
-/* ===== Footer ===== */
+body.emergencia #statusSistema {
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+body.emergencia .hero-section,
+body.emergencia footer {
+  background-color: #241600;
+}
+
+/* ==================================================
+   ALERTA MÁXIMO
+================================================== */
+body.alerta-maximo {
+  background-color: #3b0000;
+}
+
+body.alerta-maximo #statusSistema {
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+body.alerta-maximo .hero-section,
+body.alerta-maximo footer {
+  background-color: #2a0000;
+}
+
+body.alerta-maximo .card {
+  border: 2px solid #dc3545;
+}
+
+/* ==================================================
+   CONTADOR DE CRIATURAS REGISTRADAS
+================================================== */
+#contadorCriaturas {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: #0d6efd;
+  transition: color 0.4s ease;
+}
+
+/* Emergência */
+body.emergencia #contadorCriaturas {
+  color: #ffcc00;
+}
+
+/* Alerta Máximo */
+body.alerta-maximo #contadorCriaturas {
+  color: #ff4d4d;
+}
+
+
+/* ==================================================
+   FOOTER
+================================================== */
 footer {
   background-color: #1c1c1c;
   color: #bbbbbb;
   text-align: center;
   padding: 30px 20px;
+  transition: background-color 0.5s ease;
 }
 
-footer p {
-  margin: 0;
-}
-
-/* ===== Botões Bootstrap ===== */
-.btn-primary {
-  background-color: #0d6efd;
-  border-color: #0d6efd;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.btn-primary:hover {
-  background-color: #0b5ed7;
-  transform: translateY(-2px);
-}
-
-/* ===== Responsividade ===== */
+/* ==================================================
+   RESPONSIVIDADE
+================================================== */
 @media (max-width: 768px) {
   .hero-section {
-    padding: 100px 20px 60px 20px;
+    padding: 100px 20px 60px;
   }
 
   .hero-section h1 {
@@ -193,11 +235,4 @@ footer p {
     height: 180px;
   }
 }
-.alerta-maximo {
-  background-color: #3b0000;
-}
 
-.alerta-maximo .hero-section,
-.alerta-maximo footer {
-  background-color: #2a0000;
-}
