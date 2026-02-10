@@ -1,7 +1,7 @@
 /* ===== Estilo Global ===== */
 body {
-  background-color: #1e1e1e; /* fundo cinza escuro */
-  color: #ffffff; /* texto padrão branco */
+  background-color: #1e1e1e;
+  color: #ffffff;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
@@ -17,20 +17,20 @@ header .nav-link {
   background-color: #000000;
   color: #ffffff;
   transition: color 0.3s;
-  padding: 10px 20px;    
-  margin: 0 8px;             
-  border-radius: 5px;        
+  padding: 10px 20px;
+  margin: 0 8px;
+  border-radius: 5px;
   display: inline-block;
 }
 
 header .nav-link.active,
 header .nav-link:hover {
-  color: #0d6efd; 
+  color: #0d6efd;
 }
 
 /* ===== HERO ===== */
 .hero-section {
-  background-color: #1e1e1e; 
+  background-color: #1e1e1e;
   padding: 120px 20px 80px 20px;
   text-align: center;
 }
@@ -45,9 +45,24 @@ header .nav-link:hover {
   color: #cccccc;
 }
 
+/* ===== Status do Sistema ===== */
+#statusSistema {
+  margin-top: 25px;
+  font-size: 1.4rem;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Botões do Sistema ===== */
+#btnParanormal,
+#btnEmergencia {
+  padding: 12px 20px;
+  font-size: 1rem;
+  min-width: 240px;
+}
+
 /* ===== Cards de Criaturas ===== */
 .card {
-  background-color: #000000; 
+  background-color: #000000;
   border: none;
   border-radius: 0.5rem;
   transition: transform 0.3s, box-shadow 0.3s;
@@ -67,7 +82,7 @@ header .nav-link:hover {
   color: #e0e0e0;
 }
 
-/* Imagem no topo do card */
+/* ===== Imagem do Card ===== */
 .card-img-top {
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
@@ -77,17 +92,17 @@ header .nav-link:hover {
 
 /* ===== Nível de Ameaça ===== */
 .level-medio {
-  color: #ffc107; /* amarelo */
+  color: #ffc107;
   font-weight: bold;
 }
 
 .level-alto {
-  color: #fd7e14; /* laranja */
+  color: #fd7e14;
   font-weight: bold;
 }
 
 .level-critico {
-  color: #dc3545; /* vermelho */
+  color: #dc3545;
   font-weight: bold;
 }
 
@@ -108,7 +123,7 @@ footer p {
   margin: 0;
 }
 
-/* ===== Botões ===== */
+/* ===== Botões Bootstrap ===== */
 .btn-primary {
   background-color: #0d6efd;
   border-color: #0d6efd;
@@ -128,6 +143,15 @@ footer p {
 
   .hero-section h1 {
     font-size: 2rem;
+  }
+
+  #statusSistema {
+    font-size: 1.2rem;
+  }
+
+  #btnParanormal,
+  #btnEmergencia {
+    width: 100%;
   }
 
   .card-img-top {
