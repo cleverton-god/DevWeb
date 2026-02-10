@@ -60,6 +60,21 @@ header .nav-link:hover {
   min-width: 240px;
 }
 
+/* ===== Modo Alerta Máximo ===== */
+.alerta-maximo {
+  background-color: #3b0000;
+}
+
+.alerta-maximo #statusSistema {
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+.alerta-maximo .card {
+  border: 2px solid #dc3545;
+}
+
+
 /* ===== Cards de Criaturas ===== */
 .card {
   background-color: #000000;
