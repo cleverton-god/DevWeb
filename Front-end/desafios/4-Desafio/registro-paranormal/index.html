@@ -39,6 +39,9 @@
           <li class="nav-item">
             <a href="#contato" class="nav-link">Contato</a>
           </li>
+          <li class="nav-item">
+            <a href="#registro" class="nav-link">Registrar</a>
+          </li>
         </ul>
       </div>
     </header>
@@ -210,6 +213,63 @@
               </button>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMULÁRIO DE REGISTRO -->
+    <section id="registro" class="container py-5">
+      <h2 class="text-center text-white fw-bold mb-4">
+        Registrar Nova Criatura
+      </h2>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+          <form id="formCriatura" class="bg-dark p-4 rounded shadow">
+            <!-- Nome -->
+            <div class="mb-3">
+              <label for="nomeCriatura" class="form-label text-white">
+                Nome da Criatura
+              </label>
+              <input
+                type="text"
+                class="form-control"
+                id="nomeCriatura"
+                required
+              />
+            </div>
+
+            <!-- Nível de Ameaça -->
+            <div class="mb-3">
+              <label for="nivelAmeaca" class="form-label text-white">
+                Nível de Ameaça
+              </label>
+              <select class="form-select" id="nivelAmeaca" required>
+                <option value="">Selecione...</option>
+                <option value="Baixo">Baixo</option>
+                <option value="Médio">Médio</option>
+                <option value="Alto">Alto</option>
+                <option value="Crítico">Crítico</option>
+              </select>
+            </div>
+
+            <!-- Descrição -->
+            <div class="mb-3">
+              <label for="descricaoCriatura" class="form-label text-white">
+                Descrição
+              </label>
+              <textarea
+                class="form-control"
+                id="descricaoCriatura"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">
+              Registrar Criatura
+            </button>
+          </form>
         </div>
       </div>
     </section>
