@@ -1,213 +1,215 @@
 /* ==================================================
-   INÍCIO DO SISTEMA
-   Este script controla:
-   - Teste do sistema paranormal
-   - Protocolo de emergência
-   - Modo alerta máximo
-   - Mostrar/ocultar detalhes das criaturas
-   - Contador de criaturas registradas
+   TAREFA 11 - Conectar JavaScript ao Projeto
 ================================================== */
 
-// Espera o carregamento completo do DOM antes de iniciar
+console.log("Sistema de Registro Paranormal iniciado com sucesso.");
+
 document.addEventListener("DOMContentLoaded", () => {
-  pegarElementos();          // Captura todos os elementos do DOM
-  configurarEventos();       // Associa eventos de clique aos botões
-  iniciarSistema();          // Inicializa o sistema com status normal
-  atualizarContadorCriaturas(); // Atualiza o contador de criaturas registradas
+  iniciarSistema();
+  configurarEventos();
+  atualizarContadorCriaturas();
 });
 
 /* ==================================================
-   VARIÁVEIS DO DOM
+   TAREFA 12 - Botão Testar Sistema Paranormal
 ================================================== */
-let btnParanormal, btnEmergencia, btnAlertaMaximo; // Botões principais
-let statusSistema;        // Elemento que mostra o status do sistema
-let botoesDetalhes;       // Botões que mostram detalhes das criaturas
-let totalCriaturas;       // Contador de criaturas registradas
-let cardsCriaturas;       // Todos os cards de criaturas
 
-/* ==================================================
-   ESTADO DO SISTEMA
-================================================== */
-let emergenciaAtiva = false;      // Flag para protocolo de emergência
-let alertaMaximoAtivo = false;    // Flag para alerta máximo
-let testeEmAndamento = false;     // Flag para teste paranormal
+let testeEmAndamento = false;
 
-/* ==================================================
-   FUNÇÃO PARA PEGAR ELEMENTOS DO DOM
-================================================== */
-function pegarElementos() {
-  btnParanormal = document.getElementById("btnParanormal");
-  btnEmergencia = document.getElementById("btnEmergencia");
-  btnAlertaMaximo = document.getElementById("btnAlertaMaximo");
-  statusSistema = document.getElementById("statusSistema");
-  botoesDetalhes = document.querySelectorAll(".btn-detalhes");
+function testarSistema() {
+  const btnParanormal = document.getElementById("btnParanormal");
+  const statusSistema = document.getElementById("statusSistema");
 
-  totalCriaturas = document.getElementById("totalCriaturas");
-  cardsCriaturas = document.querySelectorAll(".criatura-card");
+  if (testeEmAndamento) return;
+
+  testeEmAndamento = true;
+  btnParanormal.disabled = true;
+  statusSistema.innerText = "🔍 Verificando atividade paranormal...";
+
+  setTimeout(() => {
+    const possibilidades = ["nenhuma", "anomalia", "ameaça"];
+    const resultado =
+      possibilidades[Math.floor(Math.random() * possibilidades.length)];
+
+    if (resultado === "nenhuma")
+      statusSistema.innerText = "✅ Nenhuma ameaça encontrada.";
+
+    if (resultado === "anomalia")
+      statusSistema.innerText = "⚠️ Anomalia detectada. Monitorando...";
+
+    if (resultado === "ameaça") {
+      statusSistema.innerText =
+        "🛑 Ameaça detectada! Contenção em andamento...";
+      setTimeout(() => {
+        statusSistema.innerText =
+          "✅ Ameaça contida com sucesso.";
+      }, 2000);
+    }
+
+    setTimeout(() => {
+      statusSistema.innerText =
+        "🟢 Sistema operando normalmente.";
+      btnParanormal.disabled = false;
+      testeEmAndamento = false;
+    }, 3000);
+  }, 2000);
 }
 
 /* ==================================================
-   FUNÇÃO PARA INICIAR O SISTEMA
+   TAREFA 13 - Alterar Texto Dinamicamente
+   TAREFA 14 - Manipular Classes CSS
 ================================================== */
-function iniciarSistema() {
-  // Define o status inicial
-  atualizarStatus("🟢 Sistema operando normalmente.");
+
+let emergenciaAtiva = false;
+let alertaMaximoAtivo = false;
+
+function alternarEmergencia() {
+  const btnEmergencia = document.getElementById("btnEmergencia");
+  const statusSistema = document.getElementById("statusSistema");
+
+  if (!emergenciaAtiva) {
+    alertaMaximoAtivo = false;
+    document.body.classList.remove("alerta-maximo");
+
+    emergenciaAtiva = true;
+    document.body.classList.add("emergencia");
+    statusSistema.innerText =
+      "🚨 PROTOCOLO DE EMERGÊNCIA ATIVADO 🚨";
+    btnEmergencia.innerText = "Desativar Emergência";
+  } else {
+    emergenciaAtiva = false;
+    document.body.classList.remove("emergencia");
+    statusSistema.innerText =
+      "🟢 Sistema operando normalmente.";
+    btnEmergencia.innerText =
+      "Ativar Protocolo de Emergência";
+  }
+}
+
+function alternarAlertaMaximo() {
+  alertaMaximoAtivo = !alertaMaximoAtivo;
+
+  document.body.classList.toggle("alerta-maximo");
+}
+
+
+/* ==================================================
+   TAREFA 15 - Mostrar e Ocultar Detalhes
+================================================== */
+
+function configurarDetalhes() {
+  const botoesDetalhes =
+    document.querySelectorAll(".btn-detalhes");
+
+  botoesDetalhes.forEach((botao) => {
+    botao.addEventListener("click", () => {
+      const detalhes =
+        botao.previousElementSibling;
+      const ativo =
+        detalhes.classList.toggle("ativo");
+
+      botao.innerText = ativo
+        ? "Ocultar Detalhes"
+        : "Mostrar Detalhes";
+    });
+  });
 }
 
 /* ==================================================
-   CONFIGURAÇÃO DE EVENTOS
+   TAREFA 16 - Contador de Criaturas
 ================================================== */
-function configurarEventos() {
-  // Teste do sistema paranormal
-  btnParanormal.addEventListener("click", testarSistema);
 
-  // Alternar protocolo de emergência
-  btnEmergencia.addEventListener("click", alternarEmergencia);
+function atualizarContadorCriaturas() {
+  const totalCriaturas =
+    document.getElementById("totalCriaturas");
+  const cards =
+    document.querySelectorAll(".criatura-card");
 
-  // Alternar alerta máximo
-  btnAlertaMaximo.addEventListener("click", alternarAlertaMaximo);
+  totalCriaturas.innerText = cards.length;
 
-  // Botões de detalhes de cada criatura
-  botoesDetalhes.forEach((botao) =>
-    botao.addEventListener("click", () => mostrarOuOcultarDetalhes(botao))
+  totalCriaturas.classList.add("flash");
+  setTimeout(
+    () => totalCriaturas.classList.remove("flash"),
+    300
   );
 }
 
 /* ==================================================
-   FUNÇÕES BÁSICAS
+   TAREFA 18 - Captura de Dados do Formulário
 ================================================== */
-// Atualiza o texto do status do sistema
-function atualizarStatus(texto) {
-  statusSistema.innerText = texto;
-}
 
-// Bloqueia ou libera um botão
-function bloquearBotao(botao, bloquear) {
-  botao.disabled = bloquear;
+function configurarFormulario() {
+  const form = document.getElementById("formCriatura");
+  if (!form) return;
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const nome = document.getElementById("nomeCriatura").value;
+    const nivel = document.getElementById("nivelAmeaca").value;
+    const descricao = document.getElementById("descricaoCriatura").value;
+
+    const imagemInput = document.getElementById("imagemCriatura");
+    const imagemArquivo = imagemInput.files[0];
+
+    console.log("Nova Criatura Registrada:");
+    console.log("Nome:", nome);
+    console.log("Nível:", nivel);
+    console.log("Descrição:", descricao);
+
+    if (imagemArquivo) {
+      console.log("Imagem enviada:", imagemArquivo.name);
+    } else {
+      console.log("Nenhuma imagem enviada.");
+    }
+  });
 }
 
 /* ==================================================
-   CONTADOR DE CRIATURAS REGISTRADAS
+   INICIALIZAÇÃO
 ================================================== */
-function atualizarContadorCriaturas() {
-  const quantidade = cardsCriaturas.length; // Conta os cards existentes
-  totalCriaturas.innerText = quantidade;
 
-  // Pequena animação de destaque
-  totalCriaturas.classList.add("flash");
-  setTimeout(() => totalCriaturas.classList.remove("flash"), 300);
+function iniciarSistema() {
+  const statusSistema =
+    document.getElementById("statusSistema");
+
+  statusSistema.innerText =
+    "🟢 Sistema operando normalmente.";
+}
+
+function configurarEventos() {
+  document
+    .getElementById("btnParanormal")
+    .addEventListener("click", testarSistema);
+
+  document
+    .getElementById("btnEmergencia")
+    .addEventListener("click", alternarEmergencia);
+
+  document
+    .getElementById("btnAlertaMaximo")
+    .addEventListener("click", alternarAlertaMaximo);
+
+  configurarDetalhes();
+  configurarFormulario();
 }
 
 /* ==================================================
-   TESTE DO SISTEMA PARANORMAL
+   MENU MOBILE
 ================================================== */
-function testarSistema() {
-  if (testeEmAndamento) return; // Evita cliques múltiplos
-  testeEmAndamento = true;
-  bloquearBotao(btnParanormal, true);
 
-  atualizarStatus("🔍 Verificando atividade paranormal...");
+document.addEventListener("DOMContentLoaded", () => {
 
-  // Simula um atraso na verificação
-  setTimeout(() => {
-    const resultado = gerarResultado(); // Gera resultado aleatório
-    mostrarResultado(resultado);       // Mostra na tela
+  const botao = document.getElementById("menuToggle");
+  const menu = document.getElementById("menuNav");
 
-    // Finaliza o teste após 3 segundos
-    setTimeout(() => finalizarTeste(), 3000);
-  }, 2000);
-}
+  if (botao && menu) {
+    botao.addEventListener("click", () => {
+      menu.classList.toggle("active");
 
-// Gera resultado aleatório do teste
-function gerarResultado() {
-  const possibilidades = ["nenhuma", "anomalia", "ameaça"];
-  return possibilidades[Math.floor(Math.random() * possibilidades.length)];
-}
-
-// Exibe o resultado do teste na tela
-function mostrarResultado(resultado) {
-  if (resultado === "nenhuma")
-    atualizarStatus("✅ Nenhuma ameaça encontrada.");
-
-  if (resultado === "anomalia")
-    atualizarStatus("⚠️ Anomalia detectada. Monitorando...");
-
-  if (resultado === "ameaça") {
-    atualizarStatus("🛑 Ameaça detectada! Contenção em andamento...");
-    // Após 2 segundos, assume contenção
-    setTimeout(() => atualizarStatus("✅ Ameaça contida com sucesso."), 2000);
+      // Troca ícone
+      botao.textContent = menu.classList.contains("active") ? "✖" : "☰";
+    });
   }
-}
 
-// Finaliza o teste e retorna ao status normal
-function finalizarTeste() {
-  atualizarStatus("🟢 Sistema operando normalmente.");
-  bloquearBotao(btnParanormal, false);
-  testeEmAndamento = false;
-}
-
-/* ==================================================
-   PROTOCOLO DE EMERGÊNCIA
-================================================== */
-// Alterna entre ativar/desativar emergência
-function alternarEmergencia() {
-  emergenciaAtiva ? desativarEmergencia() : ativarEmergencia();
-}
-
-// Ativa protocolo de emergência
-function ativarEmergencia() {
-  // Desativa alerta máximo se estiver ativo
-  alertaMaximoAtivo && desativarAlertaMaximo();
-
-  emergenciaAtiva = true;
-  document.body.classList.add("emergencia");
-  atualizarStatus("🚨 PROTOCOLO DE EMERGÊNCIA ATIVADO 🚨");
-  btnEmergencia.innerText = "Desativar Emergência";
-}
-
-// Desativa protocolo de emergência
-function desativarEmergencia() {
-  emergenciaAtiva = false;
-  document.body.classList.remove("emergencia");
-  atualizarStatus("🟢 Sistema operando normalmente.");
-  btnEmergencia.innerText = "Ativar Protocolo de Emergência";
-}
-
-/* ==================================================
-   ALERTA MÁXIMO
-================================================== */
-// Alterna entre ativar/desativar alerta máximo
-function alternarAlertaMaximo() {
-  alertaMaximoAtivo ? desativarAlertaMaximo() : ativarAlertaMaximo();
-}
-
-// Ativa alerta máximo
-function ativarAlertaMaximo() {
-  // Desativa emergência se estiver ativo
-  emergenciaAtiva && desativarEmergencia();
-
-  alertaMaximoAtivo = true;
-  document.body.classList.add("alerta-maximo");
-  atualizarStatus("🔴 ALERTA MÁXIMO ATIVADO 🔴");
-  btnAlertaMaximo.innerText = "Desativar Alerta Máximo";
-}
-
-// Desativa alerta máximo
-function desativarAlertaMaximo() {
-  alertaMaximoAtivo = false;
-  document.body.classList.remove("alerta-maximo");
-  atualizarStatus("🟢 Sistema operando normalmente.");
-  btnAlertaMaximo.innerText = "Modo Alerta Máximo";
-}
-
-/* ==================================================
-   DETALHES DAS CRIATURAS
-================================================== */
-// Alterna entre mostrar e ocultar detalhes de cada criatura
-function mostrarOuOcultarDetalhes(botao) {
-  const detalhes = botao.previousElementSibling; // seleciona div .detalhes
-  const ativo = detalhes.classList.toggle("ativo"); // adiciona ou remove classe
-
-  // Atualiza o texto do botão
-  botao.innerText = ativo ? "Ocultar Detalhes" : "Mostrar Detalhes";
-}
+});

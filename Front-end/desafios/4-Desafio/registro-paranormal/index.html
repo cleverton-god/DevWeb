@@ -18,33 +18,32 @@
   <body>
     <!-- HEADER -->
     <header class="bg-dark w-100 fixed-top shadow-sm">
-      <div
-        class="container d-flex flex-wrap justify-content-between align-items-center py-3"
-      >
-        <a
-          href="#hero"
-          class="d-flex align-items-center text-decoration-none"
-          aria-label="Voltar ao início"
-        >
-          <span class="fs-4 fw-semibold text-white">Arquivo da Ordem</span>
-        </a>
-        <ul class="nav nav-pills">
-          <li class="nav-item"><a href="#hero" class="nav-link">Início</a></li>
-          <li class="nav-item">
-            <a href="#criaturas" class="nav-link">Criaturas</a>
-          </li>
-          <li class="nav-item">
-            <a href="#sobrevivencia" class="nav-link">Sobrevivência</a>
-          </li>
-          <li class="nav-item">
-            <a href="#contato" class="nav-link">Contato</a>
-          </li>
-          <li class="nav-item">
-            <a href="#registro" class="nav-link">Registrar</a>
-          </li>
-        </ul>
-      </div>
-    </header>
+  <div
+    class="container d-flex flex-wrap justify-content-between align-items-center py-3"
+  >
+    <a
+      href="#hero"
+      class="d-flex align-items-center text-decoration-none"
+      aria-label="Voltar ao início"
+    >
+      <span class="fs-4 fw-semibold text-white">Arquivo da Ordem</span>
+    </a>
+
+    <!-- BOTÃO MOBILE -->
+    <button class="menu-toggle text-white" id="menuToggle">
+      ☰
+    </button>
+
+    <ul class="nav nav-pills" id="menuNav">
+      <li class="nav-item"><a href="#hero" class="nav-link">Início</a></li>
+      <li class="nav-item"><a href="#criaturas" class="nav-link">Criaturas</a></li>
+      <li class="nav-item"><a href="#sobrevivencia" class="nav-link">Sobrevivência</a></li>
+      <li class="nav-item"><a href="#contato" class="nav-link">Contato</a></li>
+      <li class="nav-item"><a href="#registro" class="nav-link">Registrar</a></li>
+    </ul>
+  </div>
+</header>
+
 
     <!-- HERO -->
     <section
@@ -217,62 +216,70 @@
       </div>
     </section>
 
-    <!-- FORMULÁRIO DE REGISTRO -->
-    <section id="registro" class="container py-5">
-      <h2 class="text-center text-white fw-bold mb-4">
-        Registrar Nova Criatura
-      </h2>
+    <form id="formCriatura" class="bg-dark p-4 rounded shadow">
 
-      <div class="row justify-content-center">
-        <div class="col-12 col-md-8 col-lg-6">
-          <form id="formCriatura" class="bg-dark p-4 rounded shadow">
-            <!-- Nome -->
-            <div class="mb-3">
-              <label for="nomeCriatura" class="form-label text-white">
-                Nome da Criatura
-              </label>
-              <input
-                type="text"
-                class="form-control"
-                id="nomeCriatura"
-                required
-              />
-            </div>
+  <!-- Nome -->
+  <div class="mb-3">
+    <label for="nomeCriatura" class="form-label text-white">
+      Nome da Criatura
+    </label>
+    <input
+      type="text"
+      class="form-control"
+      id="nomeCriatura"
+      required
+    />
+  </div>
 
-            <!-- Nível de Ameaça -->
-            <div class="mb-3">
-              <label for="nivelAmeaca" class="form-label text-white">
-                Nível de Ameaça
-              </label>
-              <select class="form-select" id="nivelAmeaca" required>
-                <option value="">Selecione...</option>
-                <option value="Baixo">Baixo</option>
-                <option value="Médio">Médio</option>
-                <option value="Alto">Alto</option>
-                <option value="Crítico">Crítico</option>
-              </select>
-            </div>
+  <!-- Nível de Ameaça -->
+  <div class="mb-3">
+    <label for="nivelAmeaca" class="form-label text-white">
+      Nível de Ameaça
+    </label>
+    <select class="form-select" id="nivelAmeaca" required>
+      <option value="">Selecione...</option>
+      <option value="Baixo">Baixo</option>
+      <option value="Médio">Médio</option>
+      <option value="Alto">Alto</option>
+      <option value="Crítico">Crítico</option>
+    </select>
+  </div>
 
-            <!-- Descrição -->
-            <div class="mb-3">
-              <label for="descricaoCriatura" class="form-label text-white">
-                Descrição
-              </label>
-              <textarea
-                class="form-control"
-                id="descricaoCriatura"
-                rows="3"
-                required
-              ></textarea>
-            </div>
+  <!-- Descrição -->
+  <div class="mb-3">
+    <label for="descricaoCriatura" class="form-label text-white">
+      Descrição
+    </label>
+    <textarea
+      class="form-control"
+      id="descricaoCriatura"
+      rows="3"
+      required
+    ></textarea>
+  </div>
 
-            <button type="submit" class="btn btn-success w-100">
-              Registrar Criatura
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
+  <!-- IMAGEM -->
+  <div class="mb-3">
+    <label for="imagemCriatura" class="form-label text-white">
+      Imagem da Criatura
+    </label>
+    <input
+      type="file"
+      class="form-control"
+      id="imagemCriatura"
+      accept="image/*"
+    />
+    <div class="form-text text-light">
+      Formatos aceitos: JPG, PNG, WEBP
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-success w-100">
+    Registrar Criatura
+  </button>
+
+</form>
+
 
     <!-- FOOTER -->
     <footer class="bg-dark text-white py-4">

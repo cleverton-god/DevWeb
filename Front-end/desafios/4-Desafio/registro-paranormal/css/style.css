@@ -1,45 +1,78 @@
 /* ==================================================
-   ESTILO GLOBAL
+   1. ESTILO GLOBAL
 ================================================== */
+
 body {
   background-color: #1e1e1e;
   color: #ffffff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
-  transition: background-color 0.5s ease;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
+
 /* ==================================================
-   HEADER
+   2. HEADER / NAVBAR
 ================================================== */
+
 header {
-  width: 100%;
-  z-index: 1000;
+  background-color: #000000 !important;
+  border-bottom: 1px solid #1f1f1f;
+}
+
+header .container {
+  gap: 20px;
+}
+
+header .nav {
+  gap: 15px;
 }
 
 header .nav-link {
-  background-color: #000000;
-  color: #ffffff;
-  padding: 10px 20px;
-  margin: 0 8px;
-  border-radius: 5px;
-  transition: color 0.3s;
+  color: #cccccc !important;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
-header .nav-link.active,
 header .nav-link:hover {
-  color: #0d6efd;
+  background-color: #111111;
+  color: #ffffff !important;
 }
+
+header .nav-link.active {
+  background-color: #0d6efd;
+  color: #ffffff !important;
+}
+
+header .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  bottom: 4px;
+  width: 0%;
+  height: 2px;
+  background-color: #0d6efd;
+  transition: width 0.3s ease;
+}
+
+header .nav-link:hover::after {
+  width: 70%;
+}
+
 
 /* ==================================================
-   HERO
+   3. HERO SECTION
 ================================================== */
+
 .hero-section {
   background-color: #1e1e1e;
   padding: 120px 20px 80px;
   text-align: center;
-  transition: background-color 0.5s ease;
+  transition: background-color 0.4s ease;
 }
 
 .hero-section h1 {
@@ -51,9 +84,11 @@ header .nav-link:hover {
   color: #cccccc;
 }
 
+
 /* ==================================================
-   STATUS DO SISTEMA
+   4. STATUS DO SISTEMA
 ================================================== */
+
 #statusSistema {
   margin-top: 25px;
   font-size: 1.4rem;
@@ -61,16 +96,18 @@ header .nav-link:hover {
   transition: color 0.4s ease;
 }
 
+
 /* ==================================================
-   BOTÕES DO SISTEMA
+   5. BOTÕES DO SISTEMA
 ================================================== */
+
 #btnParanormal,
 #btnEmergencia,
 #btnAlertaMaximo {
   padding: 12px 20px;
   font-size: 1rem;
   min-width: 240px;
-  transition: background-color 0.3s, color 0.3s;
+  transition: all 0.3s ease;
 }
 
 #btnParanormal:hover {
@@ -88,14 +125,16 @@ header .nav-link:hover {
   color: #ffffff;
 }
 
+
 /* ==================================================
-   CARDS DE CRIATURAS
+   6. CARDS DE CRIATURAS
 ================================================== */
+
 .card {
   background-color: #000000;
   border: none;
   border-radius: 0.5rem;
-  transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
 }
 
 .card:hover {
@@ -114,34 +153,33 @@ header .nav-link:hover {
 .card-img-top {
   height: 200px;
   object-fit: cover;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
 }
 
+
 /* ==================================================
-   NÍVEIS DE AMEAÇA
+   7. NÍVEIS DE AMEAÇA
 ================================================== */
+
 .level-medio {
   color: #ffc107;
   font-weight: bold;
-  text-shadow: 0 0 2px #000;
 }
 
 .level-alto {
   color: #fd7e14;
   font-weight: bold;
-  text-shadow: 0 0 2px #000;
 }
 
 .level-critico {
   color: #dc3545;
   font-weight: bold;
-  text-shadow: 0 0 2px #000;
 }
 
+
 /* ==================================================
-   DETALHES DAS CRIATURAS
+   8. DETALHES DAS CRIATURAS
 ================================================== */
+
 .detalhes {
   display: none;
   margin-top: 12px;
@@ -156,51 +194,11 @@ header .nav-link:hover {
   display: block;
 }
 
-/* ==================================================
-   MODO EMERGÊNCIA
-================================================== */
-body.emergencia {
-  background-color: #2a1a00;
-}
-
-body.emergencia #statusSistema {
-  color: #ffcc00;
-  font-weight: bold;
-}
-
-body.emergencia .hero-section,
-body.emergencia footer {
-  background-color: #241600;
-}
-
-body.emergencia .card {
-  border: 2px solid #ffcc00;
-}
 
 /* ==================================================
-   ALERTA MÁXIMO
+   9. CONTADOR
 ================================================== */
-body.alerta-maximo {
-  background-color: #3b0000;
-}
 
-body.alerta-maximo #statusSistema {
-  color: #ff4d4d;
-  font-weight: bold;
-}
-
-body.alerta-maximo .hero-section,
-body.alerta-maximo footer {
-  background-color: #2a0000;
-}
-
-body.alerta-maximo .card {
-  border: 2px solid #dc3545;
-}
-
-/* ==================================================
-   CONTADOR DE CRIATURAS REGISTRADAS
-================================================== */
 #contadorCriaturas {
   margin-top: 15px;
   font-size: 1.2rem;
@@ -210,39 +208,162 @@ body.alerta-maximo .card {
   transition: color 0.4s ease;
 }
 
-body.emergencia #contadorCriaturas {
-  color: #ffcc00;
-}
-
-body.alerta-maximo #contadorCriaturas {
-  color: #ff4d4d;
-}
 
 /* ==================================================
-   FOOTER
+   10. MODO EMERGÊNCIA
 ================================================== */
+
+body.emergencia {
+  background-color: #2a1a00;
+}
+
+body.emergencia .hero-section,
+body.emergencia footer {
+  background-color: #241600;
+}
+
+body.emergencia #statusSistema,
+body.emergencia #contadorCriaturas {
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+body.emergencia .card {
+  border: 2px solid #ffcc00;
+}
+
+
+/* ==================================================
+   11. ALERTA MÁXIMO (TUDO VERMELHO)
+================================================== */
+
+body.alerta-maximo {
+  background-color: #2b0000;
+  color: #ffcccc;
+}
+
+body.alerta-maximo .hero-section,
+body.alerta-maximo footer {
+  background-color: #1a0000;
+}
+
+body.alerta-maximo header {
+  background-color: #140000 !important;
+}
+
+body.alerta-maximo .nav-link {
+  background-color: #330000;
+  color: #ff9999 !important;
+}
+
+body.alerta-maximo #statusSistema,
+body.alerta-maximo #contadorCriaturas {
+  color: #ff4d4d;
+  font-weight: bold;
+}
+
+body.alerta-maximo .card {
+  background-color: #1a0000;
+  border: 2px solid #ff0000;
+}
+
+body.alerta-maximo .detalhes {
+  background-color: #260000;
+  border-left: 3px solid #ff0000;
+}
+
+
+/* ==================================================
+   12. FOOTER
+================================================== */
+
 footer {
   background-color: #1c1c1c;
   color: #bbbbbb;
   text-align: center;
   padding: 30px 20px;
-  transition: background-color 0.5s ease;
+  transition: background-color 0.4s ease;
 }
 
+
 /* ==================================================
-   RESPONSIVIDADE
+   13. FORMULÁRIO DE REGISTRO
 ================================================== */
+
+#registro form {
+  background-color: #111111 !important;
+  border: 1px solid #1f1f1f;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+#registro form:hover {
+  box-shadow: 0 0 20px rgba(13, 110, 253, 0.15);
+}
+
+#registro .form-control,
+#registro .form-select,
+#registro input[type="file"] {
+  background-color: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+#registro .form-control:focus,
+#registro .form-select:focus {
+  background-color: #1f1f1f;
+  border-color: #0d6efd;
+  box-shadow: 0 0 6px rgba(13, 110, 253, 0.5);
+  color: #ffffff;
+}
+
+#registro button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 255, 100, 0.3);
+}
+
+
+body.alerta-maximo #registro form {
+  background-color: #1a0000 !important;
+  border: 1px solid #ff0000;
+}
+
+body.alerta-maximo #registro .form-control,
+body.alerta-maximo #registro .form-select,
+body.alerta-maximo #registro input[type="file"] {
+  background-color: #260000;
+  border: 1px solid #ff0000;
+  color: #ffcccc;
+}
+
+body.alerta-maximo #registro .form-control:focus,
+body.alerta-maximo #registro .form-select:focus {
+  border-color: #ff4d4d;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+
+/* ==================================================
+   14. RESPONSIVIDADE
+================================================== */
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
+
   .hero-section {
     padding: 100px 20px 60px;
   }
 
   .hero-section h1 {
     font-size: 2rem;
-  }
-
-  #statusSistema {
-    font-size: 1.2rem;
   }
 
   #btnParanormal,
@@ -254,14 +375,57 @@ footer {
   .card-img-top {
     height: 180px;
   }
+
+  header .container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-top: 10px;
+  }
+
+  header .nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 15px;
+    gap: 10px;
+  }
+
+  header .nav.active {
+    display: flex;
+  }
+
+  header .nav-item {
+    width: 100%;
+  }
+
+  header .nav-link {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #111;
+    border-radius: 8px;
+  }
+
+  header .nav-link:hover {
+    background-color: #0d6efd;
+    color: #fff !important;
+  }
 }
 
+
 @media (max-width: 576px) {
+
   .card-img-top {
     height: 160px;
   }
-  
+
   .hero-section h1 {
     font-size: 1.8rem;
   }
+
 }
