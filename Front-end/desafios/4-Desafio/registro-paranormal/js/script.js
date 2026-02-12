@@ -116,23 +116,37 @@ function configurarDetalhes() {
 }
 
 /* ==================================================
-   TAREFA 16 - Contador de Criaturas
+   TAREFA 16 - Contador de Criaturas (Versão Melhorada)
 ================================================== */
 
 function atualizarContadorCriaturas() {
-  const totalCriaturas =
-    document.getElementById("totalCriaturas");
+  const totalCriaturas = document.getElementById("totalCriaturas");
+  const cards = document.querySelectorAll(".criatura-card");
 
-  const cards =
-    document.querySelectorAll(".criatura-card");
+  const valorAtual = parseInt(totalCriaturas.innerText) || 0;
+  const novoValor = cards.length;
 
-  totalCriaturas.innerText = cards.length;
+  let contador = valorAtual;
 
-  totalCriaturas.classList.add("flash");
+  const animacao = setInterval(() => {
+    if (contador < novoValor) {
+      contador++;
+    } else if (contador > novoValor) {
+      contador--;
+    } else {
+      clearInterval(animacao);
+    }
+
+    totalCriaturas.innerText = contador;
+  }, 50);
+
+  totalCriaturas.classList.add("contador-ativo");
+
   setTimeout(() => {
-    totalCriaturas.classList.remove("flash");
-  }, 300);
+    totalCriaturas.classList.remove("contador-ativo");
+  }, 400);
 }
+
 
 /* ==================================================
    TAREFA 18 e 19 - Formulário + Criação Dinâmica
