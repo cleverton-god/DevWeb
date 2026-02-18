@@ -1,0 +1,4 @@
+[17/02/2026, 22:15:37] Usuário cadastrado: cleverton
+[17/02/2026, 22:15:45] Listagem de usuários
+[17/02/2026, 22:15:52] Listagem de usuários
+[17/02/2026, 22:15:54] Usuário removido: cleverton
