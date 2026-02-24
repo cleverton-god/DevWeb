@@ -1,0 +1,13 @@
+{
+  "name": "mini-site-node",
+  "version": "1.0.0",
+  "description": "Mini site com Node HTTP puro",
+  "main": "pagesserver.js",
+  "scripts": {
+    "start": "node pagesserver.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
