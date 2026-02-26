@@ -4,11 +4,7 @@ const app = express();
 const PORT = 3000;
 app.use(express.json());
 
-const produtos = [
-  { id: 1, nome: "Mouse", preco: 50 },
-  { id: 2, nome: "Teclado", preco: 120 },
-  { id: 3, nome: "Monitor", preco: 800 }
-];
+const produtos = [];
 let contadorId = 1;
 
 app.post("/produtos", (req, res) => {
