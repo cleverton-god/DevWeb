@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Biblioteca</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    ul { list-style: none; padding: 0; }
+    li { padding: 5px; border-bottom: 1px solid #ccc; display: flex; justify-content: space-between; align-items: center; }
+    input, button { margin: 5px; padding: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Biblioteca</h1>
+
+  <button id="btnCarregar">Carregar Livros</button>
+  <ul id="listaLivros"></ul>
+
+  <h2>Adicionar Livro</h2>
+  <form id="formLivro">
+    <input type="text" id="titulo" placeholder="Título" required />
+    <input type="text" id="autor" placeholder="Autor" required />
+    <input type="number" id="ano" placeholder="Ano" required />
+    <button type="submit">Cadastrar</button>
+  </form>
+
+  <script>
+    const urlBase = 'http://localhost:3000/livros';
+    const listaLivros = document.getElementById('listaLivros');
+    const btnCarregar = document.getElementById('btnCarregar');
+    const formLivro = document.getElementById('formLivro');
+
+    async function carregarLivros() {
+      listaLivros.innerHTML = '';
+      const res = await fetch(urlBase);
+      const livros = await res.json();
+      livros.forEach(l => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span>${l.titulo} - ${l.autor} (${l.ano})</span>
+          <span>
+            <button onclick="editarLivro(${l.id})">Editar</button>
+            <button onclick="deletarLivro(${l.id})">Excluir</button>
+          </span>
+        `;
+        listaLivros.appendChild(li);
+      });
+    }
+
+    btnCarregar.addEventListener('click', carregarLivros);
+
+    formLivro.addEventListener('submit', async e => {
+      e.preventDefault();
+      const titulo = document.getElementById('titulo').value;
+      const autor = document.getElementById('autor').value;
+      const ano = parseInt(document.getElementById('ano').value);
+
+      const res = await fetch(urlBase, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo, autor, ano })
+      });
+
+      if (res.ok) {
+        alert('Livro cadastrado!');
+        formLivro.reset();
+        carregarLivros();
+      }
+    });
+
+    async function deletarLivro(id) {
+      if (!confirm('Deseja realmente excluir este livro?')) return;
+      const res = await fetch(`${urlBase}/${id}`, { method: 'DELETE' });
+      if (res.ok) {
+        alert('Livro removido!');
+        carregarLivros();
+      }
+    }
+
+    async function editarLivro(id) {
+      const novoTitulo = prompt('Digite o novo título:');
+      const novoAutor = prompt('Digite o novo autor:');
+      const novoAno = prompt('Digite o novo ano:');
+
+      if (novoTitulo && novoAutor && novoAno != null) {
+        const res = await fetch(`${urlBase}/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ titulo: novoTitulo, autor: novoAutor, ano: parseInt(novoAno) })
+        });
+        if (res.ok) {
+          alert('Livro atualizado!');
+          carregarLivros();
+        }
+      }
+    }
+
+    carregarLivros();
+  </script>
+</body>
+</html>
