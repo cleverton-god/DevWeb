@@ -2,76 +2,59 @@ const express = require("express");
 const router = express.Router();
 
 let usuarios = [];
-let proximoId = 1;
+let idAtual = 1;
 
+/* -------------------------
+   FUNÇÕES DE LÓGICA
+-------------------------- */
 
-router.get("/api/usuarios", (req, res) => {
-  res.status(200).json(usuarios);
-});
+function listarUsuarios() {
+  return usuarios;
+}
 
-router.get('/api/usuarios/:id', (req, res) => {
+function criarUsuario(dados) {
 
-    const id = Number(req.params.id);
+  if (!dados.nome || !dados.idade) {
+    throw new Error("Nome e idade são obrigatórios");
+  }
 
-    const usuario = usuarios.find(u => u.id === id);
-
-    if (!usuario) {
-        return res.status(404).json({ erro: "Usuário não encontrado" });
-    }
-
-    res.json(usuario);
-});
-
-router.post("/api/usuarios", (req, res) => {
-  const { nome, idade } = req.body;
-
-  if (!nome || nome.trim() === "") {
-    return res.status(400).json({
-      erro: "Nome é obrigatório",
-    }); 
+  if (dados.idade < 0) {
+    throw new Error("Idade inválida");
   }
 
   const novoUsuario = {
-    id: proximoId++,
-    nome,
-    idade,
+    id: idAtual++,
+    nome: dados.nome,
+    idade: dados.idade
   };
 
   usuarios.push(novoUsuario);
 
-  res.status(201).json(novoUsuario);
+  return novoUsuario;
+}
+
+/* -------------------------
+   ROTAS
+-------------------------- */
+
+router.get("/", (req, res) => {
+  res.json(listarUsuarios());
 });
 
-router.put('/api/usuarios/:id', (req, res) => {
+router.post("/", (req, res) => {
 
-    const id = Number(req.params.id);
-    const { nome, idade } = req.body;
+  try {
 
-    const usuario = usuarios.find(u => u.id === id);
+    const usuarioCriado = criarUsuario(req.body);
 
-    if (!usuario) {
-        return res.status(404).json({ erro: "Usuário não encontrado" });
-    }
-    
-    usuario.nome = nome ?? usuario.nome;
-    usuario.idade = idade ?? usuario.idade;
+    res.status(201).json(usuarioCriado);
 
-    res.json(usuario);
-});
+  } catch (erro) {
 
-router.delete('/api/usuarios/:id', (req, res) => {
+    res.status(400).json({ erro: erro.message });
 
-    const id = Number(req.params.id);
+  }
 
-    const index = usuarios.findIndex(u => u.id === id);
-
-    if (index === -1) {
-        return res.status(404).json({ erro: "Usuário não encontrado" });
-    }
-
-    usuarios.splice(index, 1);
-
-    res.status(204).send();
 });
 
 module.exports = router;
