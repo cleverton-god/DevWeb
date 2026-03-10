@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Usuário</title>
+    <title>Editar Usuário</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
         body {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
             min-height: 100vh;
             padding-top: 50px;
         }
@@ -23,8 +23,8 @@
             border: 2px solid #e0e0e0;
         }
         .form-control:focus {
-            border-color: #11998e;
-            box-shadow: 0 0 0 0.2rem rgba(17, 153, 142, 0.25);
+            border-color: #4b6cb7;
+            box-shadow: 0 0 0 0.2rem rgba(75, 108, 183, 0.25);
         }
         .btn {
             border-radius: 10px;
@@ -39,10 +39,11 @@
             <div class="col-md-6">
                 <div class="card p-4">
                     <div class="text-center mb-4">
-                        <i class="bi bi-person-plus-fill" style="font-size: 3rem; color: #11998e;"></i>
-                        <h2 class="mt-2">Cadastrar Usuário</h2>
+                        <i class="bi bi-pencil-square" style="font-size: 3rem; color: #4b6cb7;"></i>
+                        <h2 class="mt-2">Editar Usuário</h2>
                     </div>
-                    <form id="formCadastro">
+                    <form id="formEditar">
+                        <input type="hidden" id="id">
                         <div class="mb-3">
                             <label for="nome" class="form-label">Nome Completo</label>
                             <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome completo" required>
@@ -52,10 +53,10 @@
                             <input type="number" class="form-control" id="idade" name="idade" placeholder="Digite a idade" min="0" max="150" required>
                         </div>
                         <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="bi bi-check-circle me-2"></i>Cadastrar
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-check-circle me-2"></i>Salvar Alterações
                             </button>
-                            <a href="/" class="btn btn-secondary">
+                            <a href="/lista" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left me-2"></i>Voltar
                             </a>
                         </div>
@@ -66,6 +67,6 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/js/cadastro.js"></script>
+    <script src="/js/editar.js"></script>
 </body>
 </html>

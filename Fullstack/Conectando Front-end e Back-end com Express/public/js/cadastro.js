@@ -2,44 +2,46 @@ const form = document.getElementById("formCadastro");
 const mensagem = document.getElementById("mensagem");
 
 form.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-  event.preventDefault();
+    const nome = document.getElementById("nome").value;
+    const idade = parseInt(document.getElementById("idade").value);
 
-  const nome = document.getElementById("nome").value;
-  const idade = document.getElementById("idade").value;
+    const usuario = {
+        nome,
+        idade
+    };
 
-  const usuario = {
-    nome,
-    idade: Number(idade)
-  };
+    try {
+        const resposta = await fetch("/api/usuarios", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(usuario)
+        });
 
-  try {
+        if (!resposta.ok) {
+            const erro = await resposta.json();
+            throw new Error(erro.erro || "Erro ao cadastrar usuário");
+        }
 
-    const resposta = await fetch("/api/usuarios", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"  
-      },
-      body: JSON.stringify(usuario)
-    });
+        const dados = await resposta.json();
 
-    if (!resposta.ok) {
-      throw new Error("Erro ao cadastrar usuário");
+        mensagem.textContent = `Usuário ${dados.usuario.nome} cadastrado com sucesso!`;
+        mensagem.className = "alert alert-success mt-3 text-center";
+        mensagem.style.display = "block";
+
+        form.reset();
+
+        setTimeout(() => {
+            window.location.href = "/lista";
+        }, 1500);
+
+    } catch (erro) {
+        mensagem.textContent = erro.message;
+        mensagem.className = "alert alert-danger mt-3 text-center";
+        mensagem.style.display = "block";
+        console.error(erro);
     }
-
-    const dados = await resposta.json();
-
-    mensagem.textContent = `Usuário ${dados.nome} cadastrado com sucesso!`;
-    mensagem.style.color = "green";
-
-    form.reset();
-
-  } catch (erro) {
-
-    mensagem.textContent = "Erro ao cadastrar usuário.";
-    mensagem.style.color = "red";
-
-    console.error(erro);
-  }
-
 });
