@@ -1,3 +1,4 @@
+
 const lista = document.getElementById("lista");
 const mensagem = document.getElementById("mensagem");
 const botao = document.getElementById("btnAtualizar");
@@ -30,6 +31,7 @@ async function carregarUsuarios() {
 
         mensagem.style.display = "none";
     } catch (erro) {
+        // Mostrar erro em vermelho
         mensagem.textContent = "Erro ao carregar usuários: " + erro.message;
         mensagem.className = "alert alert-danger text-center";
         mensagem.style.display = "block";
@@ -43,7 +45,7 @@ function renderizarUsuarios(usuarios) {
     if (usuarios.length === 0) {
         lista.innerHTML = `
             <tr>
-                <td colspan="4" class="text-center text-muted py-4">
+                <td colspan="5" class="text-center text-muted py-4">
                     <i class="bi bi-inbox" style="font-size: 2rem;"></i>
                     <p class="mb-0 mt-2">Nenhum usuário cadastrado</p>
                 </td>
@@ -58,6 +60,7 @@ function renderizarUsuarios(usuarios) {
             <td>${usuario.id}</td>
             <td>${usuario.nome}</td>
             <td>${usuario.idade} anos</td>
+            <td>${usuario.email}</td>
             <td>
                 <a href="/editar/${usuario.id}" class="btn btn-sm btn-warning me-1">
                     <i class="bi bi-pencil"></i> Editar
@@ -86,10 +89,13 @@ document.getElementById("btnConfirmarExclusao").addEventListener("click", async 
         });
 
         if (!resposta.ok) {
-            throw new Error("Erro ao excluir usuário");
+            const erro = await resposta.json();
+            throw new Error(erro.erro || "Erro ao excluir usuário");
         }
 
         modalExcluir.hide();
+        
+        // Mostrar sucesso em verde
         mensagem.textContent = "Usuário excluído com sucesso!";
         mensagem.className = "alert alert-success text-center";
         mensagem.style.display = "block";
@@ -97,9 +103,11 @@ document.getElementById("btnConfirmarExclusao").addEventListener("click", async 
         carregarUsuarios();
 
     } catch (erro) {
+        // Mostrar erro em vermelho
         mensagem.textContent = "Erro ao excluir usuário: " + erro.message;
         mensagem.className = "alert alert-danger text-center";
         mensagem.style.display = "block";
         console.error(erro);
     }
 });
+

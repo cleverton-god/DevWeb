@@ -1,17 +1,17 @@
+
 const usuariosService = require("../services/usuariosService");
 
+/* -------------------------
+   ROTAS - CONTROLLERS
+-------------------------- */
+
 function listarUsuarios(req, res) {
-
     const usuarios = usuariosService.listarUsuarios();
-
     res.json(usuarios);
-
 }
 
 function buscarUsuario(req, res) {
-
     const id = Number(req.params.id);
-
     const usuario = usuariosService.buscarUsuarioPorId(id);
 
     if (!usuario) {
@@ -21,16 +21,13 @@ function buscarUsuario(req, res) {
     }
 
     res.json(usuario);
-
 }
 
 function criarUsuario(req, res) {
-
     try {
+        const { nome, idade, email } = req.body;
 
-        const { nome, idade } = req.body;
-
-        const usuario = usuariosService.criarUsuario(nome, idade);
+        const usuario = usuariosService.criarUsuario(nome, idade, email);
 
         res.status(201).json({
             mensagem: "Usuário criado com sucesso",
@@ -38,23 +35,18 @@ function criarUsuario(req, res) {
         });
 
     } catch (erro) {
-
         res.status(400).json({
             erro: erro.message
         });
-
     }
-
 }
 
 function atualizarUsuario(req, res) {
-
     try {
-
         const id = Number(req.params.id);
-        const { nome, idade } = req.body;
+        const { nome, idade, email } = req.body;
 
-        const usuario = usuariosService.atualizarUsuario(id, nome, idade);
+        const usuario = usuariosService.atualizarUsuario(id, nome, idade, email);
 
         if (!usuario) {
             return res.status(404).json({
@@ -62,22 +54,20 @@ function atualizarUsuario(req, res) {
             });
         }
 
-        res.json(usuario);
+        res.json({
+            mensagem: "Usuário atualizado com sucesso",
+            usuario
+        });
 
     } catch (erro) {
-
         res.status(400).json({
             erro: erro.message
         });
-
     }
-
 }
 
 function deletarUsuario(req, res) {
-
     const id = Number(req.params.id);
-
     const removido = usuariosService.deletarUsuario(id);
 
     if (!removido) {
@@ -87,7 +77,6 @@ function deletarUsuario(req, res) {
     }
 
     res.status(204).send();
-
 }
 
 module.exports = {
@@ -97,3 +86,4 @@ module.exports = {
     atualizarUsuario,
     deletarUsuario
 };
+

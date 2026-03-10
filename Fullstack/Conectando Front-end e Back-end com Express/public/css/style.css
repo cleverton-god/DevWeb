@@ -1,98 +1,202 @@
+
 /* ===== RESET BÁSICO ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  /* ===== CONFIGURAÇÃO GLOBAL ===== */
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f6f9;
+}
+
+/* ===== CONFIGURAÇÃO GLOBAL ===== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: #333;
-    line-height: 1.6;
+    min-height: 100vh;
     padding: 20px;
-  }
-  
-  /* ===== CONTAINER PADRÃO ===== */
-  .container {
+}
+
+.container {
     max-width: 900px;
     margin: auto;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* ===== TÍTULOS ===== */
-  h1, h2, h3 {
+}
+
+/* ===== TÍTULOS ===== */
+h1, h2, h3, h4 {
     margin-bottom: 15px;
     color: #222;
-  }
-  
-  /* ===== LINKS ===== */
-  a {
+    font-weight: 600;
+}
+
+/* ===== LINKS ===== */
+a {
     text-decoration: none;
-    color: #007bff;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  /* ===== BOTÕES ===== */
-  button {
-    background-color: #007bff;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/* ===== CARDS ===== */
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 20px;
+    border-bottom: none;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+/* ===== BOTÕES ===== */
+.btn {
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #5a6fd6 0%, #6a4190 100%);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    border: none;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border: none;
+    color: white;
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+    border: none;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    border: none;
+}
+
+/* ===== INPUTS E FORMULÁRIOS ===== */
+.form-control {
+    border-radius: 10px;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-label {
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+/* ===== TABELAS ===== */
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  /* ===== INPUTS E FORMULÁRIOS ===== */
-  input, select, textarea {
-    width: 100%;
-    padding: 8px;
-    margin: 8px 0 15px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  label {
-    font-weight: bold;
-  }
-  
-  /* ===== TABELAS ===== */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-  }
-  
-  table th, table td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: left;
-  }
-  
-  table th {
-    background-color: #007bff;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.table tbody td {
+    padding: 15px;
+    vertical-align: middle;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: #f8f9fa;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(102, 126, 234, 0.1);
+}
+
+/* ===== ALERTAS ===== */
+.alert {
+    border-radius: 10px;
+    padding: 15px 20px;
+    font-weight: 500;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
     color: white;
-  }
-  
-  /* ===== RESPONSIVIDADE ===== */
-  @media (max-width: 600px) {
+    border: none;
+}
+
+.alert-danger {
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+    color: white;
+    border: none;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+}
+
+/* ===== MODAIS ===== */
+.modal-content {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.modal-header {
+    padding: 20px;
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.modal-footer {
+    padding: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
     body {
-      padding: 10px;
+        padding: 10px;
     }
-  
-    .container {
-      padding: 15px;
+    
+    .card-body {
+        padding: 20px;
     }
-  }
+    
+    .btn {
+        padding: 10px 18px;
+    }
