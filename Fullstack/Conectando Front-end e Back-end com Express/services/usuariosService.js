@@ -1,3 +1,4 @@
+const pool = require("../database/db");
 
 let usuarios = [];
 let proximoId = 1;
@@ -6,19 +7,31 @@ let proximoId = 1;
    FUNÇÕES AUXILIARES
 -------------------------- */
 
-function buscarUsuarioPorId(id) {
-    return usuarios.find(u => u.id === id);
+async function buscarUsuarioPorId(id) {
+
+    const resultado = await pool.query(
+        "SELECT * FROM usuarios WHERE id = $1",
+        [id]
+    );
+
+    return resultado.rows[0];
+
 }
 
 /* -------------------------
    FUNÇÕES DE LÓGICA
 -------------------------- */
 
-function listarUsuarios() {
-    return usuarios;
+async function listarUsuarios() {
+
+    const resultado = await pool.query(
+        "SELECT * FROM usuarios ORDER BY id"
+    );
+
+    return resultado.rows;
 }
 
-function criarUsuario(nome, idade, email) {
+async function criarUsuario(nome, idade, email) {
     // Validação de nome vazio
     if (!nome || nome.trim() === "") {
         throw new Error("Nome é obrigatório");
@@ -54,20 +67,20 @@ function criarUsuario(nome, idade, email) {
         throw new Error("Email deve conter @");
     }
 
-    const novoUsuario = {
-        id: proximoId++,
-        nome: nome.trim(),
-        idade,
-        email: email.trim()
-    };
+    const resultado = await pool.query(
+        `
+        INSERT INTO usuarios (nome, idade, email)
+        VALUES ($1, $2, $3)
+        RETURNING *
+        `,
+        [nome, idade, email]
+    );
 
-    usuarios.push(novoUsuario);
-
-    return novoUsuario;
+    return resultado.rows[0];
 }
 
-function atualizarUsuario(id, nome, idade, email) {
-    const usuario = buscarUsuarioPorId(id);
+async function atualizarUsuario(id, nome, idade, email) {
+    const usuario = await buscarUsuarioPorId(id);
 
     if (!usuario) {
         return null;
@@ -106,19 +119,29 @@ function atualizarUsuario(id, nome, idade, email) {
         usuario.email = email.trim();
     }
 
-    return usuario;
+    const resultado = await pool.query(
+        `
+        UPDATE usuarios
+        SET nome = COALESCE($1, nome),
+            idade = COALESCE($2, idade),
+            email = COALESCE($3, email)
+        WHERE id = $4
+        RETURNING *
+        `,
+        [nome, idade, email, id]
+    );
+
+    return resultado.rows[0];
 }
 
-function deletarUsuario(id) {
-    const index = usuarios.findIndex(u => u.id === id);
+async function deletarUsuario(id) {
 
-    if (index === -1) {
-        return false;
-    }
+    const resultado = await pool.query(
+        "DELETE FROM usuarios WHERE id = $1",
+        [id]
+    );
 
-    usuarios.splice(index, 1);
-
-    return true;
+    return resultado.rowCount > 0;
 }
 
 module.exports = {

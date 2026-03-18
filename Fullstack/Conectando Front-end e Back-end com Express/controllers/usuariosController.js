@@ -5,29 +5,37 @@ const usuariosService = require("../services/usuariosService");
    ROTAS - CONTROLLERS
 -------------------------- */
 
-function listarUsuarios(req, res) {
-    const usuarios = usuariosService.listarUsuarios();
-    res.json(usuarios);
-}
-
-function buscarUsuario(req, res) {
-    const id = Number(req.params.id);
-    const usuario = usuariosService.buscarUsuarioPorId(id);
-
-    if (!usuario) {
-        return res.status(404).json({
-            erro: "Usuário não encontrado"
-        });
+async function listarUsuarios(req, res) {
+    try {
+        const usuarios = await usuariosService.listarUsuarios();
+        res.json(usuarios);
+    } catch (erro) {
+        res.status(500).json({ erro: erro.message });
     }
-
-    res.json(usuario);
 }
 
-function criarUsuario(req, res) {
+async function buscarUsuario(req, res) {
+    try {
+        const id = Number(req.params.id);
+        const usuario = await usuariosService.buscarUsuarioPorId(id);
+
+        if (!usuario) {
+            return res.status(404).json({
+                erro: "Usuário não encontrado"
+            });
+        }
+
+        res.json(usuario);
+    } catch (erro) {
+        res.status(500).json({ erro: erro.message });
+    }
+}
+
+async function criarUsuario(req, res) {
     try {
         const { nome, idade, email } = req.body;
 
-        const usuario = usuariosService.criarUsuario(nome, idade, email);
+        const usuario = await usuariosService.criarUsuario(nome, idade, email);
 
         res.status(201).json({
             mensagem: "Usuário criado com sucesso",
@@ -41,12 +49,12 @@ function criarUsuario(req, res) {
     }
 }
 
-function atualizarUsuario(req, res) {
+async function atualizarUsuario(req, res) {
     try {
         const id = Number(req.params.id);
         const { nome, idade, email } = req.body;
 
-        const usuario = usuariosService.atualizarUsuario(id, nome, idade, email);
+        const usuario = await usuariosService.atualizarUsuario(id, nome, idade, email);
 
         if (!usuario) {
             return res.status(404).json({
@@ -66,17 +74,21 @@ function atualizarUsuario(req, res) {
     }
 }
 
-function deletarUsuario(req, res) {
-    const id = Number(req.params.id);
-    const removido = usuariosService.deletarUsuario(id);
+async function deletarUsuario(req, res) {
+    try {
+        const id = Number(req.params.id);
+        const removido = await usuariosService.deletarUsuario(id);
 
-    if (!removido) {
-        return res.status(404).json({
-            erro: "Usuário não encontrado"
-        });
+        if (!removido) {
+            return res.status(404).json({
+                erro: "Usuário não encontrado"
+            });
+        }
+
+        res.status(204).send();
+    } catch (erro) {
+        res.status(500).json({ erro: erro.message });
     }
-
-    res.status(204).send();
 }
 
 module.exports = {
