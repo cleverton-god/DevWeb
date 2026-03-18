@@ -18,6 +18,18 @@ async function buscarUsuarioPorId(id) {
 
 }
 
+async function contarUsuarios() {
+
+    const resultado = await pool.query(
+        "SELECT COUNT(*) FROM usuarios"
+    );
+
+    return parseInt(resultado.rows[0].count);
+
+}
+
+
+
 /* -------------------------
    FUNÇÕES DE LÓGICA
 -------------------------- */
@@ -149,6 +161,7 @@ module.exports = {
     buscarUsuarioPorId,
     criarUsuario,
     atualizarUsuario,
-    deletarUsuario
+    deletarUsuario,
+    contarUsuarios
 };
 

@@ -2,13 +2,40 @@
 const lista = document.getElementById("lista");
 const mensagem = document.getElementById("mensagem");
 const botao = document.getElementById("btnAtualizar");
+const totalUsuarios = document.getElementById("totalUsuarios");
 
 let modalExcluir = null;
 let usuarioParaExcluir = null;
 
-document.addEventListener('DOMContentLoaded', function() {
+async function contarUsuarios() {
+    try {
+        const resposta = await fetch("/api/usuarios/contar");
+
+        if (!resposta.ok) {
+            throw new Error("Erro ao contar usuários");
+        }
+
+        const dados = await resposta.json(); 
+
+        const total = dados.total !== undefined ? dados.total : dados;
+
+        if (totalUsuarios) {
+        totalUsuarios.textContent = total.toString();
+        totalUsuarios.style.color = total > 0 ? '#fff' : '#ff6b6b';
+        totalUsuarios.parentElement.style.background = total > 0 ? 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)' : 'linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%)';
+        }
+
+    } catch (erro) {
+        console.error('Erro no contador:', erro);
+        if (totalUsuarios) {
+            totalUsuarios.textContent = 'Erro';
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async function() {
     modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'));
-    carregarUsuarios();
+    await Promise.all([contarUsuarios(), carregarUsuarios()]);
 });
 
 botao.addEventListener("click", carregarUsuarios);
@@ -89,8 +116,14 @@ document.getElementById("btnConfirmarExclusao").addEventListener("click", async 
         });
 
         if (!resposta.ok) {
-            const erro = await resposta.json();
-            throw new Error(erro.erro || "Erro ao excluir usuário");
+            let erro = "Erro ao excluir usuário";
+            try {
+                const erroData = await resposta.json();
+                erro = erroData.erro || erro;
+            } catch(e) {
+                // 204 no content - ignore
+            }
+            throw new Error(erro);
         }
 
         modalExcluir.hide();
@@ -100,7 +133,10 @@ document.getElementById("btnConfirmarExclusao").addEventListener("click", async 
         mensagem.className = "alert alert-success text-center";
         mensagem.style.display = "block";
 
-        carregarUsuarios();
+        setTimeout(() => {
+            carregarUsuarios();
+            contarUsuarios();
+        }, 500);
 
     } catch (erro) {
         // Mostrar erro em vermelho
