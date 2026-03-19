@@ -11,11 +11,12 @@ const usuariosController = require("../controllers/usuariosController");
 // GET /api/usuarios - Listar todos
 router.get("/", usuariosController.listarUsuarios);
 
+// GET /api/usuarios/total - Contar usuários
+router.get("/total", usuariosController.contarUsuarios);
+
 // GET /api/usuarios/:id - Buscar por ID
 router.get("/:id", usuariosController.buscarUsuario);
 
-// GET /api/usuarios/contar - Contar usuários
-router.get("/total", usuariosController.contarUsuarios);
 
 // POST /api/usuarios - Criar usuário
 router.post("/", usuariosController.criarUsuario);

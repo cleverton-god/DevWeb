@@ -8,27 +8,35 @@ let modalExcluir = null;
 let usuarioParaExcluir = null;
 
 async function contarUsuarios() {
+    const totalUsuarios = document.getElementById("totalUsuarios");
+
     try {
-        const resposta = await fetch("/api/usuarios/contar");
+        const resposta = await fetch("/api/usuarios/total");
 
         if (!resposta.ok) {
             throw new Error("Erro ao contar usuários");
         }
 
-        const dados = await resposta.json(); 
+        const dados = await resposta.json();
 
-        const total = dados.total !== undefined ? dados.total : dados;
+        const total = Number(dados.total);
 
-        if (totalUsuarios) {
-        totalUsuarios.textContent = total.toString();
-        totalUsuarios.style.color = total > 0 ? '#fff' : '#ff6b6b';
-        totalUsuarios.parentElement.style.background = total > 0 ? 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)' : 'linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%)';
-        }
+        if (!totalUsuarios || !totalUsuarios.parentElement) return;
+
+        totalUsuarios.textContent = total;
+        totalUsuarios.style.color = total > 0 ? "#fff" : "#ff6b6b";
+
+        totalUsuarios.parentElement.style.background =
+            total > 0
+                ? "linear-gradient(135deg, #11998e 0%, #38ef7d 100%)"
+                : "linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%)";
 
     } catch (erro) {
-        console.error('Erro no contador:', erro);
+        console.error("Erro no contador:", erro);
+
         if (totalUsuarios) {
-            totalUsuarios.textContent = 'Erro';
+            totalUsuarios.textContent = "Erro";
+            totalUsuarios.style.color = "#ff6b6b";
         }
     }
 }

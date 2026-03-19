@@ -19,13 +19,12 @@ async function buscarUsuarioPorId(id) {
 }
 
 async function contarUsuarios() {
-
-    const resultado = await pool.query(
-        "SELECT COUNT(*) FROM usuarios"
-    );
-
-    return parseInt(resultado.rows[0].count);
-
+    try {
+        const resultado = await pool.query("SELECT COUNT(*) FROM usuarios");
+        return Number(resultado.rows[0].count);
+    } catch (error) {
+        throw new Error(`Erro ao contar usuários: ${error.message}`);
+    }
 }
 
 
@@ -54,9 +53,10 @@ async function criarUsuario(nome, idade, email) {
         throw new Error("Nome deve ter no mínimo 3 caracteres");
     }
 
+    idade = Number(idade);
     // Validação de idade obrigatória
-    if (idade === undefined || idade === null) {
-        throw new Error("Idade é obrigatória");
+    if (isNaN(idade) || idade === undefined || idade === null) {
+        throw new Error("Idade é obrigatória e deve ser número válido");
     }
 
     // Idade não pode ser negativa

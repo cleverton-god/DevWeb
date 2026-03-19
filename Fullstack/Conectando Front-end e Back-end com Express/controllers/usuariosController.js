@@ -17,7 +17,7 @@ async function listarUsuarios(req, res) {
 async function contarUsuarios(req, res) {
     try {
         const total = await usuariosService.contarUsuarios();
-        res.json(total);
+        res.json({ total });
     } catch (erro) {
         res.status(500).json({ erro: erro.message });
     }
@@ -26,6 +26,9 @@ async function contarUsuarios(req, res) {
 async function buscarUsuario(req, res) {
     try {
         const id = Number(req.params.id);
+        if (isNaN(id) || id <= 0) {
+            return res.status(400).json({ erro: "ID inválido" });
+        }
         const usuario = await usuariosService.buscarUsuarioPorId(id);
 
         if (!usuario) {
@@ -61,6 +64,9 @@ async function criarUsuario(req, res) {
 async function atualizarUsuario(req, res) {
     try {
         const id = Number(req.params.id);
+        if (isNaN(id) || id <= 0) {
+            return res.status(400).json({ erro: "ID inválido" });
+        }
         const { nome, idade, email } = req.body;
 
         const usuario = await usuariosService.atualizarUsuario(id, nome, idade, email);
@@ -86,6 +92,9 @@ async function atualizarUsuario(req, res) {
 async function deletarUsuario(req, res) {
     try {
         const id = Number(req.params.id);
+        if (isNaN(id) || id <= 0) {
+            return res.status(400).json({ erro: "ID inválido" });
+        }
         const removido = await usuariosService.deletarUsuario(id);
 
         if (!removido) {
