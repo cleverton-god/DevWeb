@@ -1,4 +1,3 @@
-
 const express = require("express");
 const router = express.Router();
 
@@ -14,11 +13,14 @@ router.get("/", usuariosController.listarUsuarios);
 // GET /api/usuarios/total - Contar usuários
 router.get("/total", usuariosController.contarUsuarios);
 
-// GET /api/usuarios/id/:id - Buscar por ID
-router.get("/:id", usuariosController.buscarUsuario);
-
 // GET /api/usuarios/idade/:idade - filtrar usuários por idade
 router.get("/idade/:idade", usuariosController.filtrarPorIdade);
+
+// GET /api/usuarios/ordenados - Usuários ordenados alfabeticamente
+router.get("/ordenados", usuariosController.ordenarNomes);
+
+// GET /api/usuarios/:id - Buscar por ID
+router.get("/:id", usuariosController.buscarUsuario);
 
 // POST /api/usuarios - Criar usuário
 router.post("/", usuariosController.criarUsuario);
@@ -30,4 +32,3 @@ router.put("/:id", usuariosController.atualizarUsuario);
 router.delete("/:id", usuariosController.deletarUsuario);
 
 module.exports = router;
-

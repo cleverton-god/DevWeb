@@ -28,6 +28,15 @@ async function filtrarPorIdade(idade) {
 
 }
 
+async function ordenarNomes() {
+
+    const resultado = await pool.query(
+        "SELECT * FROM usuarios ORDER BY nome ASC"
+    );
+
+    return resultado.rows;
+}
+
 async function contarUsuarios() {
     try {
         const resultado = await pool.query("SELECT COUNT(*) FROM usuarios");
@@ -51,6 +60,8 @@ async function listarUsuarios() {
 
     return resultado.rows;
 }
+
+
 
 async function criarUsuario(nome, idade, email) {
     // Validação de nome vazio
@@ -173,6 +184,7 @@ module.exports = {
     atualizarUsuario,
     deletarUsuario,
     contarUsuarios,
-    filtrarPorIdade
+    filtrarPorIdade,
+    ordenarNomes
 };
 

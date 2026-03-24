@@ -13,6 +13,16 @@ async function listarUsuarios(req, res) {
         res.status(500).json({ erro: erro.message });
     }
 }
+async function ordenarNomes(req, res) {
+    try {
+        const usuarios = await usuariosService.ordenarNomes();
+        res.json(usuarios);
+    } catch (erro) {
+        res.status(500).json({ erro: erro.message });
+    }
+}
+
+
 
 async function contarUsuarios(req, res) {
     try {
@@ -133,7 +143,8 @@ module.exports = {
     criarUsuario,
     atualizarUsuario,
     deletarUsuario,
-    filtrarPorIdade
+    filtrarPorIdade,
+    ordenarNomes
 };
 
 
