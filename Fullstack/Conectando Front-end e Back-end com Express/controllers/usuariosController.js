@@ -43,6 +43,23 @@ async function buscarUsuario(req, res) {
     }
 }
 
+async function filtrarPorIdade(req, res) {
+    try {
+        const idade = Number(req.params.idade);
+        const usuario = await usuariosService.filtrarPorIdade(idade);
+
+        if (!usuario) {
+            return res.status(404).json({
+                erro: "Usuário não encontrado"
+            });
+        }
+
+        res.json(usuario);
+    } catch (erro) {
+        res.status(500).json({ erro: erro.message });
+    }
+}
+
 async function criarUsuario(req, res) {
     try {
         const { nome, idade, email } = req.body;
@@ -115,7 +132,8 @@ module.exports = {
     buscarUsuario,
     criarUsuario,
     atualizarUsuario,
-    deletarUsuario
+    deletarUsuario,
+    filtrarPorIdade
 };
 
 

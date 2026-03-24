@@ -17,6 +17,16 @@ async function buscarUsuarioPorId(id) {
     return resultado.rows[0];
 
 }
+async function filtrarPorIdade(idade) {
+
+    const resultado = await pool.query(
+        "SELECT * FROM usuarios WHERE idade >= $1",
+        [idade]
+    );
+
+    return resultado.rows[0];
+
+}
 
 async function contarUsuarios() {
     try {
@@ -162,6 +172,7 @@ module.exports = {
     criarUsuario,
     atualizarUsuario,
     deletarUsuario,
-    contarUsuarios
+    contarUsuarios,
+    filtrarPorIdade
 };
 

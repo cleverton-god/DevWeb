@@ -14,9 +14,11 @@ router.get("/", usuariosController.listarUsuarios);
 // GET /api/usuarios/total - Contar usuários
 router.get("/total", usuariosController.contarUsuarios);
 
-// GET /api/usuarios/:id - Buscar por ID
+// GET /api/usuarios/id/:id - Buscar por ID
 router.get("/:id", usuariosController.buscarUsuario);
 
+// GET /api/usuarios/idade/:idade - filtrar usuários por idade
+router.get("/idade/:idade", usuariosController.filtrarPorIdade);
 
 // POST /api/usuarios - Criar usuário
 router.post("/", usuariosController.criarUsuario);
