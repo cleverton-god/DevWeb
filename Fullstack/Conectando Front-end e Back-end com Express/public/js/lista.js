@@ -43,6 +43,10 @@ async function contarUsuarios() {
 
 document.addEventListener('DOMContentLoaded', async function() {
     modalExcluir = new bootstrap.Modal(document.getElementById('modalExcluir'));
+    const filtro = document.getElementById('filtro');
+    filtro.addEventListener('keyup', function() {
+        filtrarUsuarios(this.value.toLowerCase());
+    });
     await Promise.all([contarUsuarios(), carregarUsuarios()]);
 });
 
@@ -110,6 +114,41 @@ function renderizarUsuarios(usuarios) {
         `;
         lista.appendChild(tr);
     });
+
+    // Reaplica filtro atual se existir
+    const filtro = document.getElementById('filtro');
+    if (filtro.value) {
+        filtrarUsuarios(filtro.value.toLowerCase());
+    }
+}
+
+function filtrarUsuarios(termo) {
+    const trs = lista.querySelectorAll('tr');
+    let visiveis = 0;
+
+    trs.forEach(tr => {
+        if (tr.cells.length > 1) { // Skip header/empty
+            const texto = Array.from(tr.cells).map(cell => cell.textContent.toLowerCase()).join(' ');
+            if (texto.includes(termo)) {
+                tr.style.display = '';
+                visiveis++;
+            } else {
+                tr.style.display = 'none';
+            }
+        }
+    });
+
+    // Show/hide "nenhum encontrado"
+    if (visiveis === 0 && termo) {
+        lista.innerHTML = `
+            <tr>
+                <td colspan="5" class="text-center text-muted py-4">
+                    <i class="bi bi-search" style="font-size: 2rem;"></i>
+                    <p class="mb-0 mt-2">Nenhum usuário encontrado para "${termo}"</p>
+                </td>
+            </tr>
+        `;
+    }
 }
 
 function confirmarExclusao(id, nome) {
