@@ -52,6 +52,21 @@ async function contarUsuarios() {
    FUNÇÕES DE LÓGICA
 -------------------------- */
 
+
+async function estatisticasUsuarios() {
+    const resultado = await pool.query(`
+        SELECT 
+            COUNT(*) AS total,
+            COALESCE(AVG(idade), 0) AS media_idade,
+            COALESCE(MAX(idade), 0) AS maior_idade,
+            COALESCE(MIN(idade), 0) AS menor_idade
+        FROM usuarios
+    `);
+
+    return resultado.rows[0] || { total: 0, media_idade: 0, maior_idade: 0, menor_idade: 0 };
+}
+
+
 async function listarUsuarios() {
 
     const resultado = await pool.query(
@@ -185,6 +200,7 @@ module.exports = {
     deletarUsuario,
     contarUsuarios,
     filtrarPorIdade,
-    ordenarNomes
+    ordenarNomes,
+    estatisticasUsuarios
 };
 

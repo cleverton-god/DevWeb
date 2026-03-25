@@ -22,12 +22,19 @@ async function ordenarNomes(req, res) {
     }
 }
 
-
-
 async function contarUsuarios(req, res) {
     try {
         const total = await usuariosService.contarUsuarios();
         res.json({ total });
+    } catch (erro) {
+        res.status(500).json({ erro: erro.message });
+    }
+}
+
+async function estatisticasUsuarios(req, res) {
+    try {
+        const dados = await usuariosService.estatisticasUsuarios();
+        res.json(dados);
     } catch (erro) {
         res.status(500).json({ erro: erro.message });
     }
@@ -144,7 +151,8 @@ module.exports = {
     atualizarUsuario,
     deletarUsuario,
     filtrarPorIdade,
-    ordenarNomes
+    ordenarNomes,
+    estatisticasUsuarios
 };
 
 
