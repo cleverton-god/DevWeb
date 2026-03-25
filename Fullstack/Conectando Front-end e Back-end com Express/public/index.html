@@ -1,64 +1,55 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Usuários</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .card {
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-        }
-        .btn {
-            border-radius: 10px;
-            padding: 12px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        .hero-icon {
-            font-size: 4rem;
-            color: #667eea;
-            margin-bottom: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Usuários</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/index.css">
+
+
+
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card p-5 text-center">
-                    <i class="bi bi-people-fill hero-icon"></i>
-                    <h1 class="mb-4">Sistema de Gerenciamento de Usuários</h1>
-                    <p class="lead text-muted mb-4">Gerencie seus usuários de forma simples e eficiente</p>
-                    <div class="d-flex gap-3 justify-content-center">
-                        <a href="/cadastro" class="btn btn-primary">
-                            <i class="bi bi-person-plus-fill me-2"></i>Cadastrar Usuário
-                        </a>
-                        <a href="/lista" class="btn btn-success">
-                            <i class="bi bi-list-ul me-2"></i>Listar Usuários
-                        </a>
-                        <a href="/estatisticas.html" class="btn btn-info">
-                            <i class="bi bi-bar-chart-line me-2"></i>Estatísticas
-                        </a>
-                    </div>
-                </div>
-            </div>
+<main class="dashboard-wrapper">
+    <header class="dashboard-header">
+      <h1 class="dashboard-title">
+        <i class="bi bi-people-fill"></i>
+        Sistema de Usuários
+      </h1>
+      <div></div>
+<div class="header-actions">
+        <button id="theme-toggle" class="btn btn-secondary me-2" title="Alternar tema">
+          <i class="bi bi-moon-stars-fill"></i>
+        </button>
+        <a href="/lista.html" class="btn btn-primary">
+          <i class="bi bi-list-ul"></i> Iniciar
+        </a>
+      </div>
+    </header>
+
+    <section class="hero-section">
+      <div class="card">
+        <div class="hero-content">
+          <i class="bi bi-people" aria-hidden="true"></i>
+          <h2 class="hero-title">Gerencie seus usuários facilmente</h2>
+          <p class="hero-description">Sistema completo para cadastro, listagem, edição e estatísticas</p>
+          <div class="hero-actions">
+            <a href="/lista.html" class="btn btn-primary">
+              <i class="bi bi-list-ul"></i> Ver usuários
+            </a>
+            <a href="/cadastro.html" class="btn btn-secondary">
+              <i class="bi bi-plus-circle"></i> Novo usuário
+            </a>
+          </div>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/js/theme-toggle.js"></script>
 </body>
 </html>

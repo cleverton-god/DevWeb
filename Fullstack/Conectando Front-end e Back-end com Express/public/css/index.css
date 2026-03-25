@@ -1,0 +1,40 @@
+/* INDEX PAGE - Home/Hero */
+.hero-section { padding: var(--space-xl) 0; }
+.hero-content {
+  text-align: center;
+  padding: var(--space-xl);
+}
+.hero-content i {
+  font-size: 4rem;
+  color: var(--btn-primary-bg);
+  margin-bottom: var(--space-lg);
+  display: block;
+}
+.hero-title {
+  font-size: 2rem;
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-md);
+  color: var(--text-primary);
+}
+.hero-description {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xl);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-actions {
+  display: flex;
+  gap: var(--space-lg);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .hero-section { padding: var(--space-lg) 0; }
+  .hero-title { font-size: 1.75rem; }
+  .hero-content i { font-size: 3.5rem; }
+  .hero-actions { flex-direction: column; gap: var(--space-md); }
+}
+

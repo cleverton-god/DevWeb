@@ -1,0 +1,66 @@
+/* FORM PAGES - Cadastro/Editar/Usuario */
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-xl) 0;
+}
+
+.form-card {
+  background: var(--bg-card);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  padding: var(--space-xl);
+  border: 1px solid var(--border-color);
+  width: 100%;
+  max-width: 500px;
+}
+
+.field-group {
+  margin-bottom: var(--space-lg);
+}
+
+.field-label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.form-control {
+  width: 100%;
+  padding: var(--space-md);
+  border: 2px solid var(--border-color);
+  border-radius: 0.75rem;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  font-size: var(--font-size-base);
+}
+
+.form-control:focus {
+  border-color: var(--btn-primary-bg);
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+  outline: none;
+}
+
+.help-text {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin-top: var(--space-xs);
+  font-style: italic;
+}
+
+.form-actions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--space-xl);
+}
+
+@media (max-width: 768px) {
+  .form-card { padding: var(--space-md); max-width: 100%; margin: 0 var(--space-md); }
+  .field-group { margin-bottom: var(--space-md); }
+}
+

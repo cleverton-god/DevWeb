@@ -129,7 +129,7 @@ function filtrarUsuarios(termo) {
     trs.forEach(tr => {
         if (tr.cells.length > 1) { // Skip header/empty
             const texto = Array.from(tr.cells).map(cell => cell.textContent.toLowerCase()).join(' ');
-            if (texto.includes(termo)) {
+            if (texto.includes(termo) || termo === '') {
                 tr.style.display = '';
                 visiveis++;
             } else {
@@ -139,7 +139,7 @@ function filtrarUsuarios(termo) {
     });
 
     // Show/hide "nenhum encontrado"
-    if (visiveis === 0 && termo) {
+    if (visiveis === 0 && termo !== '') {
         lista.innerHTML = `
             <tr>
                 <td colspan="5" class="text-center text-muted py-4">

@@ -41,6 +41,7 @@ async function contarUsuarios() {
     try {
         const resultado = await pool.query("SELECT COUNT(*) FROM usuarios");
         return Number(resultado.rows[0].count);
+        
     } catch (error) {
         throw new Error(`Erro ao contar usuários: ${error.message}`);
     }
