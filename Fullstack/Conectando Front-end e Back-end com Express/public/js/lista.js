@@ -97,6 +97,9 @@ function renderizarUsuarios(usuarios) {
             <td>${usuario.idade} anos</td>
             <td>${usuario.email}</td>
             <td>
+                <a href="usuario.html?id=${usuario.id}" class="btn btn-sm btn-info me-1">
+                    <i class="bi bi-eye"></i> Detalhes
+                </a>
                 <a href="/editar/${usuario.id}" class="btn btn-sm btn-warning me-1">
                     <i class="bi bi-pencil"></i> Editar
                 </a>
